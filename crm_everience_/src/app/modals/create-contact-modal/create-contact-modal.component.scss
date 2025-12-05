@@ -1,0 +1,18 @@
+  .error-rows {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    // margin-bottom: 20px; /*tolto perchè spostava la colonna di dx verso il basso*/
+    span {
+      width: 93%;
+      margin-top: 5px;
+      margin-left: 5px;
+      font-size: 13px;
+      background-color: #dd05545d;
+      color: #74042d;
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+  }

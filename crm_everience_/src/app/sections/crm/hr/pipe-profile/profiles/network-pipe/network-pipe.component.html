@@ -1,0 +1,64 @@
+<main>
+  <div class="header">
+    <h2 class="h2"><i class="fa fa-microchip" aria-hidden="true"></i></h2>
+    <div class="input-button-container">
+      <input type="text" placeholder="Search by any value" [(ngModel)]="searchTerm" (input)="applyFilter()" />
+      <button class="add-button" (click)="openModal()">+</button>
+    </div>
+  </div>
+  <div *ngIf="dataSource.length == 0" class="no-results-container">
+    <img src="../../../../../../../assets/images/sorry.png" alt="">
+    <p>Non ci sono risultati per questa ricerca!</p>
+  </div>
+  <table *ngIf="dataSource.length != 0" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nome </th>
+      <td mat-cell *matCellDef="let profile" (click)="openDetailedView(profile.id)"> {{ profile.first_name }} {{
+        profile.last_name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef> Cellulare </th>
+      <td mat-cell *matCellDef="let profile" (click)="openDetailedView(profile.id)"> {{ profile.phone }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let profile" (click)="openDetailedView(profile.id)"> {{ profile.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="soft_skills">
+      <th mat-header-cell *matHeaderCellDef> Soft Skills </th>
+      <td mat-cell *matCellDef="let profile" (click)="openDetailedView(profile.id)"> {{ profile.soft_skills }}</td>
+
+    </ng-container><ng-container matColumnDef="hard_skills">
+      <th mat-header-cell *matHeaderCellDef> Hard Skills </th>
+      <td mat-cell *matCellDef="let profile" (click)="openDetailedView(profile.id)"> {{ profile.hard_skills }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="english">
+      <th mat-header-cell *matHeaderCellDef> Inglese </th>
+      <td mat-cell *matCellDef="let profile" (click)="openDetailedView(profile.id)">
+        <span *ngIf="profile.english == 1" style="font-weight: 400;">Base</span>
+        <span *ngIf="profile.english == 2" style="font-weight: 400;">Intermedio</span>
+        <span *ngIf="profile.english == 3" style="font-weight: 400;">Avanzato</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="job_title">
+      <th mat-header-cell *matHeaderCellDef> Ruolo </th>
+      <td mat-cell *matCellDef="let profile" (click)="openDetailedView(profile.id)"> {{ profile.job_title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="seniority">
+      <th mat-header-cell *matHeaderCellDef> Seniority </th>
+      <td mat-cell *matCellDef="let profile" (click)="openDetailedView(profile.id)"> {{ profile.seniority }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+</main>

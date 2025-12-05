@@ -1,0 +1,117 @@
+<div class="modal-container">
+  <div class="modal">
+    <h2>Crea Nuovo Cliente</h2>
+
+    <div class="container">
+      <div class="rows">
+        <div>
+          <label for="company-name">Ragione Sociale<span style="color: #DD0555;">*</span></label>
+          <input [(ngModel)]="newClient.company_name" id="company_name" placeholder="Ragione Sociale" type="text" />
+          <div class="error-rows">
+            <span *ngIf="missingCompanyName">
+              Inserisci Ragione Sociale
+            </span>
+          </div>
+        </div>
+
+        <!-- <select id="company-name" (change)="onClientChange($event)" [(ngModel)]="selectedClient">
+            <option hidden value="" disabled selected>Cliente</option>
+            <option *ngFor="let client of clientsList" [value]="client">{{ client }}</option>
+          </select>-->
+
+        <div>
+          <label for="address">Address</label>
+          <input [(ngModel)]="newClient.address" id="address" placeholder="Address" type="text" />
+            <span *ngIf="missingCompanyName" style="height: 20px;"></span>
+
+        </div>
+        <div>
+          <label for="municipality">Municipality</label>
+          <input [(ngModel)]="newClient.municipality" id="municipality" placeholder="Municipality" type="text" />
+            <span *ngIf="missingCompanyName" style="height: 20px;"></span>
+        </div>
+        <div>
+          <label for="zip-code">ZIP Code</label>
+          <input [(ngModel)]="newClient.zip_code" id="zip-code" placeholder="ZIP Code" type="text" />
+            <span *ngIf="missingCompanyName" style="height: 20px;"></span>
+        </div>
+      </div>
+
+      <div class="rows">
+        <div>
+          <label for="province">Province</label>
+          <select id="company-name" (change)="onProvinceChange($event)" [(ngModel)]="selectedProvince" style="width: 110%;">
+            <option hidden value="" disabled selected>Scegli una Provincia</option>
+            <option *ngFor="let province of provincesList" [value]="province">{{ province }}</option>
+          </select>
+        </div>
+        <div>
+          <label for="city">City</label>
+          <input [(ngModel)]="newClient.city" id="city" placeholder="City" type="text" />
+        </div>
+        <div>
+          <label for="p-iva">Partita IVA</label>
+          <input [(ngModel)]="newClient.partita_iva" id="p-iva" placeholder="Partita IVA" type="text" />
+        </div>
+        <div>
+          <label for="cf">Codice Fiscale</label>
+          <input [(ngModel)]="newClient.codice_fiscale" id="cf" placeholder="Codice Fiscale" type="text" />
+        </div>
+      </div>
+
+
+      <div class="rows">
+        <div>
+          <label for="contact_name">Contact Name</label>
+          <input [(ngModel)]="newClient.contact_name" id="contact_name" placeholder="Contact Name" type="text" />
+            <span *ngIf="missingCompanyName" style="height: 20px;"></span>
+        </div>
+        <div>
+          <label for="contact_email">Contact Email<span style="color: #DD0555;">*</span></label>
+          <input [(ngModel)]="newClient.contact_email" id="contact_email" placeholder="Contact Email" type="email" />
+          <div class="error-rows">
+            <span *ngIf="missingContactEmail">
+              Inserisci Email di Contatto
+            </span>
+          </div>
+        </div>
+        <div>
+          <label for="contact_phone">Contact Phone</label>
+          <input [(ngModel)]="newClient.contact_phone" id="contact_phone" placeholder="Contact Phone" type="tel" />
+            <span *ngIf="missingCompanyName" style="height: 20px;"></span>
+        </div>
+        <div>
+          <label for="contact_role">Contact Role</label>
+          <input [(ngModel)]="newClient.contact_role" id="contact_role" placeholder="Contact Role" type="text" />
+            <span *ngIf="missingCompanyName" style="height: 20px;"></span>
+        </div>
+      </div>
+
+      <div class="rows">
+        <div>
+          <label for="ateco">ATECO</label>
+          <input [(ngModel)]="newClient.ateco" id="ateco" placeholder="ATECO" type="text" />
+        </div>
+        <div>
+          <label for="pec">PEC</label>
+          <input [(ngModel)]="newClient.pec" id="pec" placeholder="PEC" type="text" />
+        </div>
+        <div>
+          <label for="sdi">SDI Code</label>
+          <input [(ngModel)]="newClient.sdi_code" id="sdi" placeholder="SDI Code" type="text" />
+        </div>
+        <div>
+          <label for="billing">Billing Email</label>
+          <input [(ngModel)]="newClient.billing_email" id="billing" placeholder="Billing Email" type="email" />
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button (click)="closeModal()" class="all-action-buttons">Cancella</button>
+        <button (click)="createClient()" class="all-action-buttons">Salva</button>
+
+      </div>
+
+    </div>
+  </div>
+</div>

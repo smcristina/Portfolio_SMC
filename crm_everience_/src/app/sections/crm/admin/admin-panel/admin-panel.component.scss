@@ -1,0 +1,132 @@
+.content_box {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-height: 90%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.list-title-container {
+  margin-bottom: 1rem;
+  .list-title {
+    font-weight: 500;
+    margin-left: 10px;
+  }
+}
+
+.mat-elevation-z1 {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.role-select {
+  width: 150px;
+}
+
+.no-users {
+  color: #777;
+  font-style: italic;
+  margin-left: 1rem;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+th {
+  background: #037fb0de !important;
+  color: #fff;
+}
+td {
+  width: 20%;
+  select {
+    padding: 5px;
+    border: 1px solid #80808052;
+    border-radius: 5px;
+  }
+}
+td:hover {
+  cursor: default;
+}
+tr:hover {
+  background-color: rgba(239, 244, 247, 0.39);
+}
+.disabled-span {
+  background-color: grey;
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+/*
+.enabled-span {
+  background-color: #009ddc;
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+*/
+
+.btn {
+  width: 100px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  padding: 7px 15px;
+}
+.enable-button {
+  background-color: #447a44;
+}
+.enable-button:hover {
+  background-color: #244d24;
+  cursor: pointer;
+}
+.disable-button {
+  background-color: #951717;
+}
+.disable-button:hover {
+  background-color: #630a0a;
+  cursor: pointer;
+}
+
+.delete-btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: #951717;
+}
+
+.role-chip {
+  color: #fff;
+  margin-top: 15px;
+  padding: 2px 5px;
+  border-radius: 15px;
+  font-size: 13px;
+  min-width: 100px;
+}
+
+.admin {
+  background-color: #dd0555;
+}
+.commerciale {
+  background-color: #009ddc;
+}
+.hr {
+  background-color: rgb(143, 61, 143);
+}
+.marketing {
+  background-color: rgb(182, 105, 29);
+}
+.finance {
+  background-color: #447a44;
+}
+.dipendente {
+  background-color: rgb(6, 113, 113);
+}
+.default {
+  background-color: #e2a30e;
+}

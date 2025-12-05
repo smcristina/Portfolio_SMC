@@ -1,0 +1,13 @@
+<main>
+  <div>
+    <app-menu></app-menu>
+  </div>
+  <div class="view-container">
+    <app-top-bar></app-top-bar>
+    <div *ngIf="currentRoute === '/crm'" class="content">
+      <img src="../../../assets/images/main-background.png" alt="" width="100%">
+    </div>
+
+    <router-outlet></router-outlet>
+  </div>
+</main>

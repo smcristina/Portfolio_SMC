@@ -1,0 +1,74 @@
+<div class="background">
+
+  <div
+    style="display: flex; flex-direction: row; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); border-radius: 15px; width: 50%;">
+
+    <div class="login-container left-div">
+      <div class="left-logo-container">
+        <span>
+          <img src="../../../../assets/logo-white.png" alt="Logo" class="logo-everience">
+        </span>
+        <span style="margin-top: 40px;">
+          Benvenutx, effettua il login per accedere
+        </span>
+      </div>
+      <span>
+        <img src="../../../../assets/icons/password.png" alt="" width="50px" style="margin-top: -10px;">
+      </span>
+    </div>
+
+    <div class="login-container right-div">
+      <div>
+        <div style="display: flex; justify-content: center;">
+          <span>
+            <h2 class="login-text">Login</h2>
+          </span>
+        </div>
+
+        <form [formGroup]="formLogin" (ngSubmit)="login()">
+          <div class="input-label">
+            <label class="form-label">Email</label>
+            <input type="text" class="form-control" formControlName="email" placeholder="nome.cognome@everience.com"
+              autocomplete="off">
+          </div>
+          <div *ngIf="this.emailSent" class="text-danger email-popup">
+            Abbiamo inviato una email al tuo indirizzo
+          </div>
+          <div *ngIf="this.noEmail" class="text-danger email-popup">
+            Devi inserire la tua email
+          </div>
+          <div class="input-label">
+            <label class="form-label">Password</label>
+            <div class="password-input">
+              <input [type]="showPassword ? 'text' : 'password'" class="form-control" formControlName="password"
+                autocomplete="off" placeholder="*************">
+              <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
+                <img *ngIf="showPassword" src="../../../../assets/icons/open-eye.png" width="12px">
+                <img *ngIf="!showPassword" src="../../../../assets/icons/close-eye.png" width="12px">
+              </button>
+            </div>
+          </div>
+          <div class="form-footer">
+            <input type="submit" class="blue_button all-action-buttons" value="Conferma">
+          </div>
+        </form>
+        <div class="password-register-container">
+          <div class="already-registered-container">
+            <span>Non hai ancora un account?</span>
+            <button (click)="goToRegister()">Registrati</button>
+          </div>
+          <button class="login-btn btn btn-primary btn-block green_button forgot-password" (click)="forgotPassword()">
+            Password dimenticata?
+          </button>
+        </div>
+        <div *ngIf="this.invalid" class="text-danger text-danger__login">
+          Email o password errati
+        </div>
+        <div *ngIf="noServer" class="text-danger text-danger__login">
+          Problema con il server,<br> riprova più tardi
+        </div>
+        <!-- *ngIf="!richiestaInChiusura.tipo_chiusura && showValidationError" -->
+      </div>
+    </div>
+  </div>
+</div>

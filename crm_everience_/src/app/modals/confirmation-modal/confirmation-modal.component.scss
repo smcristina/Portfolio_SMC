@@ -1,0 +1,48 @@
+.header {
+  width: 100%;
+  background-color: #014661;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h2 {
+    color: #fff;
+  }
+}
+
+.mat-mdc-dialog-content {
+  text-align: center;
+  p {
+    margin-top: 20px;
+  }
+}
+.mat-mdc-dialog-actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  button {
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    padding: 8px 25px;
+    cursor: pointer;
+    width: 115px;
+    text-align: center;
+    &:first-child {
+      border: 1px solid #009ddc;
+      background-color: transparent;
+      color: #009ddc;
+    }
+    &:first-child:hover {
+      background-color: #0075a3;
+      color: #fff;
+      border: none;
+    }
+    &:last-child {
+      margin-left: 15px;
+      background-color: #009ddc;
+    }
+    &:last-child:hover {
+      background-color: #0075a3;
+    }
+  }
+}

@@ -1,0 +1,213 @@
+<main>
+  <div class="header">
+    <h2 class="h2" style="display: flex; align-items: center;">
+      Richiesta <i class="material-icons">chevron_right</i>
+      <span>{{ request.unique_speaking_code }}</span>
+    </h2>
+    <div class="input-button-container">
+      <button class="add-button" (click)="navigationBack()">
+        <i class="material-icons" style="font-weight: 600;">arrow_back</i>
+      </button>
+      <button class="add-button" (click)="editRequest()"><i class="material-icons">edit</i></button>
+
+      <button *ngIf="!request.has_pnl" class="convert-button all-action-buttons" (click)="addPNL(request.id)">Add
+        PNL</button>
+
+      <button *ngIf="request.has_pnl" class="convert-button all-action-buttons" style="text-align: center;"(click)="openModal()">Contrattualizza</button>
+    </div>
+  </div>
+
+  <!-- Lead data container -->
+  <div class="container content-box">
+    <div class="rows">
+      <div>
+        <label>Data Lead</label>
+        <input [(ngModel)]="formattedDate" class="form-control" [disabled]="!editing" type="date">
+      </div>
+      <div>
+        <label>Cliente Finale</label>
+        <input [(ngModel)]="request.final_client" class="form-control" [disabled]="!editing" type="text">
+      </div>
+      <div>
+        <label>Partita IVA</label>
+        <input [(ngModel)]="request.partita_iva" class="form-control" [disabled]="!editing" type="text">
+      </div>
+      <div>
+        <label>Tipologia Contratto</label>
+        <input [(ngModel)]="request.contract_typology" class="form-control" [disabled]="!editing" type="text">
+      </div>
+    </div>
+
+    <div class="rows">
+      <div>
+        <label>Budget Totale</label>
+        <input [(ngModel)]="request.budget" class="form-control" [disabled]="!editing" type="number">
+      </div>
+      <div>
+        <label>Referente Cliente</label>
+        <input [(ngModel)]="request.sales_owner" class="form-control" [disabled]="!editing" type="text">
+      </div>
+      <div>
+        <label>Mail Referente</label>
+        <input [(ngModel)]="request.contact_email" class="form-control" [disabled]="!editing" type="text">
+      </div>
+      <div>
+        <label>Numero Referente</label>
+        <input [(ngModel)]="request.contact_phone" class="form-control" [disabled]="!editing" type="text">
+      </div>
+    </div>
+
+    <div class="rows">
+      <div>
+        <label>Service Manager</label>
+        <select id="service-manager" (change)="onManagerChange($event)" [(ngModel)]="selectedManager"
+          [disabled]=!editing required>
+          <option value="" disabled>Service Manager</option>
+          <!-- <option *ngIf="isLoadingServiceManager" disabled>Caricamento...  </option> -->
+          <option *ngFor="let manager of serviceManagerList" [value]="manager.id">
+            {{ manager.first_name }} {{ manager.last_name }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label>Recruiter Assegnato</label>
+        <input [(ngModel)]="request.assigned_recruiter" class="form-control" [disabled]="!editing" type="text">
+      </div>
+      <div>
+        <label>Owner</label>
+        <input [(ngModel)]="request.owner" class="form-control" [disabled]="!editing" type="text">
+      </div>
+      <div>
+        <label>Indirizzo</label>
+        <input [(ngModel)]="request.address" class="form-control" [disabled]="!editing" type="text">
+      </div>
+    </div>
+
+
+    <div class="rows">
+      <div>
+        <label>Orario di Ingresso</label>
+        <input [(ngModel)]="request.clock_in" class="form-control" [disabled]="!editing" type="time">
+      </div>
+      <div>
+        <label>Orario di Uscita</label>
+        <input [(ngModel)]="request.clock_out" class="form-control" [disabled]="!editing" type="time">
+      </div>
+      <div>
+        <label>Data Inizio</label>
+        <input [(ngModel)]="formattedStartDate" class="form-control" [disabled]="!editing" type="date">
+      </div>
+      <div>
+        <label>Data Fine</label>
+        <input [(ngModel)]="formattedEndDate" class="form-control" [disabled]="!editing" type="date">
+      </div>
+    </div>
+
+    <div class="rows">
+      <div>
+        <label>Risorse Richieste</label>
+        <input [(ngModel)]="request.resources_quantity" class="form-control" [disabled]="!editing" type="number">
+      </div>
+      <div>
+        <label>Giorni Lavorativi</label>
+        <input [(ngModel)]="request.week_working_days" class="form-control" [disabled]="!editing" type="text">
+      </div>
+      <div>
+        <label>Durata Servizio (mesi)</label>
+        <input [(ngModel)]="request.service_duration" class="form-control" [disabled]="!editing" type="number">
+      </div>
+      <div>
+        <label>Backfill</label>
+        <input [(ngModel)]="backFill" class="form-control" [disabled]="!editing" type="text">
+      </div>
+
+    </div>
+
+    <div class="rows">
+      <div style="width: 40%">
+        <label>Descrizione</label>
+        <textarea [(ngModel)]="request.description" class="form-control" style="max-width: 100%;"
+          [disabled]="!editing"></textarea>
+      </div>
+      <div style="width: 40%">
+        <label>Stato</label>
+        <input [(ngModel)]="request.stato" class="form-control" [disabled]="!editing" type="text">
+      </div>
+    </div>
+  </div>
+
+  <div style="width: 100%;
+    border-bottom: 3px solid #009DDC;
+    padding-bottom: 20px;">
+    <div class="button-container">
+      <button *ngIf="editing" class="all-action-buttons" (click)="saveChanges()">Salva Modifiche</button>
+    </div>
+  </div>
+
+  <div *ngIf="request.has_pnl" class="pnl-container">
+    <h3 style="text-align: center;">Dati PNL</h3>
+    <div class="pnl-grid">
+      <div class="pnl-row">
+        <span class="label">Risorsa:</span>
+        <span class="value">{{ resource?.first_name }} {{resource?.last_name}}</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Modalità:</span>
+        <span class="value">{{ pnl?.work_mode }}</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Giornate:</span>
+        <span class="value">{{ pnl?.quantity_days }}</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Costo unitario:</span>
+        <span class="value">{{ pnl?.unit_cost | currency:'EUR':'symbol' }}</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Prezzo unitario:</span>
+        <span class="value">{{ pnl?.unit_price | currency:'EUR':'symbol' }}</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Costo totale risorsa:</span>
+        <span class="value">{{ pnl?.total_cost | currency:'EUR':'symbol' }}</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Prezzo totale:</span>
+        <span class="value">{{ pnl?.total_price | currency:'EUR':'symbol' }}</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Markup:</span>
+        <span class="value">{{ pnl?.markup }}</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Margine:</span>
+        <span class="value">{{ pnl?.margin_percentage ?? 0 | number:'1.0-2' }}%</span>
+
+      </div>
+      <div class="pnl-row">
+        <span class="label">Margine lordo:</span>
+        <span class="value">{{ pnl?.total_gross_margin | currency:'EUR':'symbol' }}</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Costo totale:</span>
+        <span class="value">{{ pnl?.total_service_cost | currency:'EUR':'symbol' }}</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Prezzo totale servizio:</span>
+        <span class="value">{{ pnl?.total_service_price | currency:'EUR':'symbol' }}</span>
+      </div>
+      <!--
+        <div class="pnl-row">
+          <span class="label">Margine Servizio:</span>
+          <span class="value">{{ pnl?.service_margin_percentage ?? 0 | percent:'1.0-2' }}</span>
+        </div>
+        <div class="pnl-row">
+          <span class="label">Margine lordo servizio:</span>
+          <span class="value">{{ pnl?.service_gross_margin | currency:'EUR':'symbol' }}</span>
+        </div>
+        -->
+    </div>
+  </div>
+
+  <app-convert-request-modal [requestId]="request.id"></app-convert-request-modal>
+</main>

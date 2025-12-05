@@ -1,0 +1,87 @@
+<div class="modal-container">
+  <div class="modal" style="width: 60%;">
+    <h2 style="margin-bottom: 0;">Crea Nuova Rubrica</h2>
+
+    <div class="container">
+      <h3 style="margin-top: 0;">Dati Azienda:</h3>
+      <div class="rows">
+        <div style="width: 48%;">
+          <label>Ragione Sociale<span style="color: #DD0555;">*</span></label>
+          <input [(ngModel)]="newContact.company_name" placeholder="Ragione Sociale" type="text" />
+            <div class="error-rows">
+              <span *ngIf="missingCompanyName">
+                Inserisci Ragione Sociale
+              </span>
+            </div>
+        </div>
+        <div style="width: 48%;">
+          <label>Fonte</label>
+          <select id="source" (change)="onSourceChange($event)" [(ngModel)]="selectedSource">
+            <option hidden value="" disabled selected>Fonte</option>
+            <option value="Referral">Referral</option>
+            <option value="Eventi">Eventi</option>
+            <option value="Social">Social</option>
+            <option value="Contatto Personale">Contatto Personale</option>
+            <option value="Altro">Altro</option>
+          </select>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 0;">Dati Referente:</h3>
+      <div class="rows">
+        <div style="width: 48%;">
+          <label>Referente Cliente<span style="color: #DD0555;">*</span></label>
+          <input [(ngModel)]="newContact.contact_name" placeholder="Referente Cliente" id="contact-name" type="text" />
+            <div class="error-rows">
+              <span *ngIf="missingContactName">
+                Inserisci Nome Contatto
+              </span>
+            </div>
+        </div>
+        <div style="width: 48%;">
+          <label>Ruolo Referente</label>
+          <input [(ngModel)]="newContact.contact_role" placeholder="Contact Role" id="contact-role" type="text"/>
+        </div>
+      </div>
+
+  <div class="rows"> 
+    <div style="width: 48%;"> 
+    <label>Email Referente<span style="color: #DD0555;">*</span></label> 
+    <input [(ngModel)]="newContact.contact_mail" placeholder="Contact Email" id="contact-email"/>
+    </div>
+<!-- 
+    aggiunto e sistemato il campo telefono referente -->
+        
+    <div style="width: 48%;">
+      <label>Telefono Referente<span style="color: #DD0555;">*</span></label>
+      <span style="display: flex; flex-direction: row; width: 100%">
+        <!-- <select name="Country" class="country-select" style="width: 25%;" [(ngModel)]="newContact.prefix">
+          <option value="+39" hidden>+39</option>
+          <option *ngFor="let country of countries" [value]="country.prefix"> -->
+        <select name="Country" class="country-select" style="width: 19%;" (change)="onPrefixChange($event)" [(ngModel)]="selectedPrefix">
+          <!-- <option hidden value="" disabled selected>+39&nbsp;&nbsp;&nbsp;Italia</option> -->
+          <option value="" disabled selected hidden>+39&nbsp;&nbsp;&nbsp;Italia</option>
+          <option *ngFor="let country of countries" [value]="country.prefix">
+            {{country.prefix}}&nbsp;&nbsp;&nbsp;{{country.name}}
+          </option>
+        </select>
+        <input type="text" maxlength="16" class="custom-form-control number" placeholder="Cellulare Referente"
+          autocomplete="off" pattern="^\+?[0-9 ]{8,18}$" width="73%" [(ngModel)]="newContact.contact_phone">
+      </span>
+    </div>
+       
+  </div>
+    <div class="error-rows">
+      <span *ngIf="missingContactEmailorPhone">
+        Inserisci Numero di Telefono o Email
+      </span>
+    </div>
+
+      <div class="button-container">
+        <button (click)="closeModal()" class="all-action-buttons">Cancella</button>
+        <button (click)="createContact()" class="all-action-buttons">Salva</button>
+        
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.buttons-container {
+  display: flex;
+  justify-content: center;
+}
+.profile-button {
+  padding: 15px 22px;
+  border-radius: 7px;
+  font-size: 15px;
+  margin-right: 15px;
+  border: 1px solid #009ddc;
+  background-color: #fff;
+  color: #009ddc;
+  cursor: pointer;
+}
+i {
+  margin-right: 3px;
+}
+.profile-button:hover {
+  background-color: #009ddc;
+  color: #fff;
+}
+.selected-button {
+  padding: 10px 20px;
+  border-radius: 7px;
+  font-size: 15px;
+  margin-right: 15px;
+  border: none;
+  background-color: #009ddc;
+  color: #fff;
+  cursor: pointer;
+}

@@ -1,0 +1,123 @@
+<main>
+  <div class="header">
+    <h2 class="h2">Dipendenti</h2>
+    <div class="input-button-container">
+      <input type="text" placeholder="Cerca per qualsiasi dato" [(ngModel)]="searchTerm" (input)="applyFilter()" />
+      <button class="add-button" (click)="openModal()">+</button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <div *ngIf="isLoading">Caricando Dipendenti...</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <table mat-table *ngIf="!isLoading && !error" [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let emp" (click)="openDetailedView(emp.id)">
+          {{ emp.first_name }} {{ emp.last_name }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="seniority">
+        <th mat-header-cell *matHeaderCellDef> Seniority </th>
+        <td mat-cell *matCellDef="let emp" (click)="openDetailedView(emp.id)">
+          <span class="role-chip" [ngClass]="emp.seniority ? emp.seniority.toLowerCase() : 'default'">
+            {{emp.seniority || 'DaInserire!'}}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="residence_province">
+        <th mat-header-cell *matHeaderCellDef> Provincia di residenza </th>
+        <td mat-cell *matCellDef="let emp" (click)="openDetailedView(emp.id)"> {{ emp.residence_province }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="client">
+        <th mat-header-cell *matHeaderCellDef> Cliente </th>
+        <td mat-cell *matCellDef="let emp" (click)="openDetailedView(emp.id)"> {{ emp.client || 'Non disponibile' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="final_client">
+        <th mat-header-cell *matHeaderCellDef> Cliente Finale </th>
+        <td mat-cell *matCellDef="let emp" (click)="openDetailedView(emp.id)"> {{ emp.final_client || 'Non disponibile'
+          }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="start_date">
+        <th mat-header-cell *matHeaderCellDef> Inizio Commessa </th>
+        <td mat-cell *matCellDef="let emp" (click)="openDetailedView(emp.id)">
+          @if(emp.start_date !== null || emp.start_date !== ''){
+          {{ emp.start_date | date:'dd/MM/yyyy' }}
+          }
+          @else{
+          Non disponibile
+          }
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="end_date">
+        <th mat-header-cell *matHeaderCellDef> Fine Commessa </th>
+        <td mat-cell *matCellDef="let emp" (click)="openDetailedView(emp.id)"> {{ emp.end_date | date:'dd/MM/yyyy' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cost">
+        <th mat-header-cell *matHeaderCellDef> Costo </th>
+        <td mat-cell *matCellDef="let emp" (click)="openDetailedView(emp.id)"> {{ emp.cost |
+          currency:'EUR':'symbol':'1.2-2' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="availability">
+        <th mat-header-cell *matHeaderCellDef> Disponibilità </th>
+        <td mat-cell *matCellDef="let emp">
+          <span *ngIf="emp.availability === 1" style="color: green;">✔</span>
+          <span *ngIf="emp.availability !== 1" style="color: rgb(202, 8, 8);">✘</span>
+        </td>
+      </ng-container>
+
+      <!-- Modifica -->
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> Modifica </th>
+        <td mat-cell *matCellDef="let emp" (click)="openEditModal(emp.id)">
+          <i class="material-icons" style="color: #057ead;">edit</i>
+        </td>
+      </ng-container>
+
+      <!-- Add skills -->
+      <ng-container matColumnDef="skills">
+        <th mat-header-cell *matHeaderCellDef> Skills </th>
+        <td mat-cell *matCellDef="let emp" (click)="openSkillsModal(emp)">
+          <img src="../../../../../assets/icons/plus.png" alt="+" width="25px">
+        </td>
+      </ng-container>
+
+      <!-- Cancella -->
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> Cancella </th>
+        <td mat-cell *matCellDef="let emp" (click)="openConfirmDialog(emp.id)">
+          <i class="material-icons" style="color: #cc112a;;">delete</i>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+
+  <app-create-employee-modal (employeeCreated)="createEmployee($event)"></app-create-employee-modal>
+
+  <app-modify-employee-modal [employee]="employee" (employeeUpdated)="onEmployeeUpdated($event)">
+  </app-modify-employee-modal>
+
+  <!-- ngif=editModalOpen non so a cosa serva  -->
+
+  <app-create-skills-modal *ngIf="skillsModalOpen" [employee]="selectedEmployee"
+    (close)="skillsModalOpen = false; selectedEmployee = null">
+  </app-create-skills-modal>
+
+</main>

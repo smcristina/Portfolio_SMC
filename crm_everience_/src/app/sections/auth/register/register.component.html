@@ -1,0 +1,70 @@
+<div class="background">
+
+  <div
+    style="display: flex; flex-direction: row; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); border-radius: 15px; width: 50%;">
+    <div class="login-container left-div">
+      <div class="left-logo-container">
+        <span>
+          <img src="../../../../assets/logo-white.png" alt="Logo" class="logo-everience">
+        </span>
+        <span style="margin-top: 40px;">
+          Non hai un account? Registrati per accedere
+        </span>
+      </div>
+      <span>
+        <img src="../../../../assets/icons/application.png" alt="" width="50px" style="margin-top: -20px;">
+      </span>
+    </div>
+
+    <div class="login-container right-div">
+      <div>
+        <div style="display: flex; justify-content: center;">
+          <span>
+            <h2 class="login-text">Registrazione</h2>
+          </span>
+        </div>
+
+        <form [formGroup]="formReg" (ngSubmit)="onSubmit()">
+          <div class="input-label">
+            <label class="form-label">Email</label>
+            <input type="text" class="form-control" formControlName="email" placeholder="nome.cognome@everience.com"
+              autocomplete="off">
+          </div>
+
+          <div class="input-label">
+            <label class="form-label">Password</label>
+            <div class="password-input">
+              <input [type]="showPassword ? 'text' : 'password'" class="form-control" formControlName="password"
+                autocomplete="off" placeholder="*************">
+              <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
+                <img *ngIf="showPassword" src="../../../../assets/icons/open-eye.png" width="12px">
+                <img *ngIf="!showPassword" src="../../../../assets/icons/close-eye.png" width="12px">
+              </button>
+            </div>
+          </div>
+          <div class="input-label">
+            <label class="form-label">Conferma Password</label>
+            <div class="password-input">
+              <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control"
+                formControlName="confirmPassword" autocomplete="off" placeholder="*************">
+              <button class="btn btn-outline-secondary" type="button" (click)="toggleConfirmPasswordVisibility()">
+                <img *ngIf="showConfirmPassword" src="../../../../assets/icons/open-eye.png" width="12px">
+                <img *ngIf="!showConfirmPassword" src="../../../../assets/icons/close-eye.png" width="12px">
+              </button>
+            </div>
+          </div>
+          <div class="form-footer">
+            <input type="submit" class="blue_button all-action-buttons" value="Conferma">
+          </div>
+        </form>
+        <div class="password-register-container">
+          <div class="already-registered-container">
+            <span>Hai già un account?</span>
+            <button (click)="goToLogin()">Vai al Login</button>
+          </div>
+        </div>
+        <!-- *ngIf="!richiestaInChiusura.tipo_chiusura && showValidationError" -->
+      </div>
+    </div>
+  </div>
+</div>

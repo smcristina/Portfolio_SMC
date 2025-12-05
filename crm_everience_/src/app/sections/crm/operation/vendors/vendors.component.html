@@ -1,0 +1,52 @@
+<main>
+  <div class="header">
+    <h2 class="h2">Fornitori</h2>
+    <div class="input-button-container">
+      <input type="text" placeholder="Search by any value" [(ngModel)]="searchTerm" (input)="applyFilter()" />
+      <button class="add-button" (click)="openModal()">+</button>
+      <button class="add-button" (click)="export()" style="    margin-left: 5px;">
+        <i class="fa fa-file-excel-o"></i>
+      </button>
+    </div>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="vendor_name">
+      <th mat-header-cell *matHeaderCellDef> Fornitore </th>
+      <td mat-cell *matCellDef="let vendor" (click)="openDetailedView(vendor.id)"> {{ vendor.vendor_name }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="province">
+      <th mat-header-cell *matHeaderCellDef> Provincia </th>
+      <td mat-cell *matCellDef="let vendor" (click)="openDetailedView(vendor.id)"> {{ vendor.province }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="service_category">
+      <th mat-header-cell *matHeaderCellDef> Categoria di Servizio </th>
+      <td mat-cell *matCellDef="let vendor" (click)="openDetailedView(vendor.id)"> {{ vendor.service_category }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="standard_daily_cost">
+      <th mat-header-cell *matHeaderCellDef> Costo Giornata Standard </th>
+      <td mat-cell *matCellDef="let vendor" (click)="openDetailedView(vendor.id)"> {{ vendor.standard_daily_cost |
+        currency: 'EUR'}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="maggiorazione_non_feriale">
+      <th mat-header-cell *matHeaderCellDef> Maggiorazione Festivi </th>
+      <td mat-cell *matCellDef="let vendor" (click)="openDetailedView(vendor.id)"> {{ vendor.maggiorazione_non_feriale
+        }} </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <app-create-vendor-modal (newVendor)="handleNewVendor($event)"></app-create-vendor-modal>
+
+</main>

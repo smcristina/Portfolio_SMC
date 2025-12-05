@@ -1,0 +1,142 @@
+<main>
+  <div class="header">
+    <div class="input-button-container">
+      <h2 class="h2" style="display: flex; align-items: center;">Cliente <i
+          class="material-icons">chevron_right</i><span>{{client?.company_name}}</span> </h2>
+    </div>
+    <div class="input-button-container">
+      <button class="add-button" (click)="navigationBack()">
+        <i class="material-icons" style="font-weight: 600;">arrow_back</i>
+      </button>
+      <button class="add-button" (click)="editClient()"><i class="material-icons">edit</i></button>
+    </div>
+  </div>
+
+  <!--Client data container-->
+  <div *ngIf="client" class="container content-box">
+    <div class="rows">
+      <div>
+        <label>Ragione Sociale</label>
+
+        <input [(ngModel)]="client.company_name" class="form-control" id="company-name" name="company-name"
+          [disabled]="!editing" type="text">
+
+
+      </div>
+      <div>
+        <label>Indirizzo</label>
+        <input [(ngModel)]="client.address" class="form-control" id="address" name="address" [disabled]="!editing"
+          type="text">
+      </div>
+      <div>
+        <label>Comune</label>
+        <input [(ngModel)]="client.municipality" class="form-control" id="municipality" name="municipality"
+          [disabled]="!editing" type="text">
+      </div>
+      <div>
+        <label>Provincia</label>
+        <input [(ngModel)]="client.province" class="form-control" id="province" name="province" [disabled]="!editing"
+          type="text">
+      </div>
+    </div>
+
+    <div class="rows">
+      <div>
+        <label>CAP</label>
+        <input [(ngModel)]="client.zip_code" class="form-control" id="zip_code" name="zip_code" [disabled]="!editing"
+          type="text">
+      </div>
+      <div>
+        <label>Città</label>
+        <input [(ngModel)]="client.city" class="form-control" id="city" name="city" [disabled]="!editing" type="text">
+      </div>
+      <div>
+        <label>Partita IVA</label>
+        <input [(ngModel)]="client.partita_iva" class="form-control" id="partita_iva" name="partita_iva"
+          [disabled]="!editing" type="text">
+      </div>
+      <div>
+        <label>Codice Fiscale</label>
+        <input [(ngModel)]="client.codice_fiscale" class="form-control" id="codice_fiscale" name="codice_fiscale"
+          [disabled]="!editing" type="text">
+      </div>
+    </div>
+
+    <div class="rows">
+      <div>
+        <label>Referente Cliente</label>
+        @if (client.contact_name){
+        <input [(ngModel)]="client.contact_name" class="form-control" id="contact_name" name="contact_name"
+          [disabled]="!editing" type="text">
+        }
+        @else {
+        <input placeholder="Non disponibile" class="form-control" id="contact_name" name="contact_name"
+          [disabled]="!editing" type="text">
+        }
+      </div>
+      <div>
+        <label>Ruolo Referente</label>
+        @if (client.contact_role){
+        <input [(ngModel)]="client.contact_role" class="form-control" id="contact_role" name="contact_role"
+          [disabled]="!editing" type="text">
+        }
+        @else {
+        <input placeholder="Non disponibile" class="form-control" id="contact_name" name="contact_name"
+          [disabled]="!editing" type="text">
+        }
+      </div>
+      <div>
+        <label>Mail Referente</label>
+        @if (client.contact_email){
+        <input [(ngModel)]="client.contact_email" class="form-control" id="contact_email" name="contact_email"
+          [disabled]="!editing" type="text">
+        }
+        @else {
+        <input placeholder="Non disponibile" class="form-control" id="contact_name" name="contact_name"
+          [disabled]="!editing" type="text">
+        }
+      </div>
+      <div>
+        <label>Numero Referente</label>
+        @if (client.contact_phone){
+        <input [(ngModel)]="client.contact_phone" class="form-control" id="contact_phone" name="contact_phone"
+          [disabled]="!editing" type="text">
+        }
+        @else {
+        <input placeholder="Non disponibile" class="form-control" id="contact_name" name="contact_name"
+          [disabled]="!editing" type="text">
+        }
+      </div>
+    </div>
+
+
+    <div class="rows">
+      <div>
+        <label>PEC</label>
+        @if(client.pec){
+        <input [(ngModel)]="client.pec" class="form-control" id="pec" name="pec" [disabled]="!editing" type="text">
+        }
+        @else {
+        <input placeholder="Non disponibile" class="form-control" id="contact_name" name="contact_name"
+          [disabled]="!editing" type="text">
+        }
+      </div>
+      <div>
+        <label>Codice SDI</label>
+        <input [(ngModel)]="client.sdi_code" class="form-control" id="sdi_code" name="sdi_code" [disabled]="!editing"
+          type="text">
+      </div>
+      <div>
+        <label>Mail Fatturazione</label>
+        <input [(ngModel)]="client.billing_email" class="form-control" id="billing_email" name="billing_email"
+          [disabled]="!editing" type="text">
+      </div>
+    </div>
+  </div>
+  <div style="width: 100%;">
+    <div class="button-container">
+      <button *ngIf="editing" class="all-action-buttons" (click)="saveChanges()">Salva Modifiche</button>
+
+    </div>
+  </div>
+</main>

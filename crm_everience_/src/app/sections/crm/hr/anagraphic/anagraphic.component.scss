@@ -1,0 +1,22 @@
+main {
+  margin-top: 20px;
+}
+
+td {
+  cursor: pointer;
+}
+
+.junior {
+  background-color: #dd0555;
+}
+.middle {
+  background-color: #009ddc;
+}
+.senior {
+  background-color: #fab716;
+}
+.table-container {
+  height: calc(100vh - 240px); // O l'altezza che preferisci
+  overflow-y: auto;
+  margin-top: 15px;
+}

@@ -1,0 +1,54 @@
+<!-- blue menu -->
+
+<div class="all-menues-container">
+  <nav class="menu">
+    <div>
+      <div *ngIf="currentUser?.user_role_name == 'Comerciale' || currentUser?.user_role_name == 'Admin'"
+        class="menu-item" (click)="showSubmenu('Sales')">Sales
+      </div>
+      <div *ngIf="currentUser?.user_role_name == 'Service Manager' || currentUser?.user_role_name == 'Admin'"
+        class="menu-item" (click)="showSubmenu('Operation')">
+        Operation</div>
+      <div *ngIf="currentUser?.user_role_name == 'HR' || mockRole == 'Admin'" class="menu-item"
+        (click)="showSubmenu('HR')">HR</div>
+      <div *ngIf="currentUser?.user_role_name == 'Admin'" class="menu-item" (click)="showSubmenu('Admin')">
+        Administration</div>
+      <div *ngIf="currentUser?.user_role_name == 'Admin'" class="menu-item" (click)="showSubmenu('Archive')">
+        Archivio</div>
+    </div>
+  </nav>
+
+
+  <!-- grey submenu -->
+
+
+  <nav class="sub-menu" [class.active]="subMenuIsVisible">
+    <button (click)="hideSubMenu()" class="compress-btn"><i class="material-icons">close</i></button>
+    <div *ngIf="selectedSubMenu == 'Sales'">
+      <div (click)="navigateTo('crm/contacts')" class="sub-menu-item">Rubriche</div>
+      <div (click)="navigateTo('crm/clients')" class="sub-menu-item">Clienti</div>
+      <div (click)="navigateTo('crm/leads')" class="sub-menu-item">Leads</div>
+      <div (click)="navigateTo('crm/opportunities')" class="sub-menu-item">Opportunità</div>
+      <div (click)="navigateTo('crm/requests')" class="sub-menu-item">Richieste</div>
+      <div (click)="navigateTo('crm/sales-contracts')" class="sub-menu-item">Contratti</div>
+    </div>
+    <div *ngIf="selectedSubMenu == 'Operation'">
+      <div (click)="navigateTo('crm/requests')" class="sub-menu-item">Richieste</div>
+      <div (click)="navigateTo('crm/vendors')" class="sub-menu-item">Fornitori</div>
+    </div>
+    <div *ngIf="selectedSubMenu == 'HR'">
+      <div class="sub-menu-item" (click)="navigateTo('crm/anagraphic')">Anagrafica</div>
+      <div class="sub-menu-item" (click)="navigateTo('crm/pipe-profile')">Pipe</div>
+      <div class="sub-menu-item" (click)="navigateTo('crm/requests')">Richieste</div>
+    </div>
+    <div *ngIf="selectedSubMenu == 'Admin'">
+      <div class="sub-menu-item" (click)="navigateTo('crm/admin-panel')">Approvazione Utenze</div>
+    </div>
+    <div *ngIf="selectedSubMenu == 'Archive'">
+      <div class="sub-menu-item" (click)="navigateTo('crm/archived-leads')">Leads</div>
+      <div class="sub-menu-item" (click)="navigateTo('crm/archived-opportunities')">Opportunità</div>
+      <div class="sub-menu-item" (click)="navigateTo('crm/archived-requests')">Richieste</div>
+      <div class="sub-menu-item" (click)="navigateTo('crm/archived/contracts')">Contratti</div>
+    </div>
+  </nav>
+</div>

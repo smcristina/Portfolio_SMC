@@ -1,0 +1,51 @@
+<main>
+  <div class="header">
+    <h2 class="h2" style="display: flex; align-items: center;">Fornitore <i
+        class="material-icons">chevron_right</i><span>{{vendor.vendor_name}}</span> </h2>
+    <div class="input-button-container">
+      <button class="add-button" (click)="editClient()"><i class="material-icons">edit</i></button>
+    </div>
+  </div>
+  <!--Client data container-->
+  <div class="container">
+    <div class="rows first">
+      <div>
+        <label>Fornitore</label>
+        <input [(ngModel)]="vendor.vendor_name" class="form-control" id="company-name" name="company-name"
+          [disabled]="!editing" type="text">
+      </div>
+      <div>
+        <label>Provincia</label>
+        <input [(ngModel)]="vendor.province" class="form-control" id="address" name="address" [disabled]="!editing"
+          type="text">
+      </div>
+      <div>
+        <label>Categoria di Servizio</label>
+        <input [(ngModel)]="vendor.service_category" class="form-control" id="municipality" name="municipality"
+          [disabled]="!editing" type="text">
+      </div>
+    </div>
+
+    <div class="rows second">
+      <div>
+        <label>Costo Giornata Standard</label>
+        <input [(ngModel)]="vendor.standard_daily_cost" class="form-control" id="zip_code" name="zip_code"
+          [disabled]="!editing" type="text">
+      </div>
+      <div>
+        <label>Maggiorazione Festivi</label>
+        <input [(ngModel)]="vendor.maggiorazione_non_feriale" class="form-control" id="city" name="city"
+          [disabled]="!editing" type="text">
+      </div>
+    </div>
+  </div>
+
+
+
+  <div style="width: 100%;">
+    <div class="button-container">
+      <button *ngIf="editing" class="all-action-buttons">Salva Modifiche</button>
+    </div>
+  </div>
+
+</main>

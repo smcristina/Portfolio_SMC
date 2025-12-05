@@ -1,0 +1,83 @@
+.modal {
+  width: 65%;
+  background-color: #014661;
+  padding: 10px 20px;
+  .rows {
+    div {
+      width: 95%;
+    }
+  }
+  .error-rows {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    span {
+      width: 93%;
+      margin-top: 5px;
+      margin-left: 5px;
+      font-size: 13px;
+      background-color: #dd05545d;
+      color: #74042d;
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+  }
+  .close-btn {
+    border: none;
+    background-color: #fff;
+    color: #014661;
+    font-size: 16px;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+.employee-data-container,
+.contract-data-container {
+  width: 40%;
+  min-height: 90%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px 20px;
+  .markup {
+    position: absolute;
+    span {
+      position: relative;
+      top: -15px;
+
+      padding: 14px 17px;
+      border-radius: 7px;
+      i {
+        color: #fff;
+        font-size: 20px;
+      }
+    }
+  }
+
+  .header {
+    width: 100%;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+  }
+  .rows-container {
+    width: 100%;
+    margin-top: 35px;
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border-bottom: 1px solid rgb(196, 196, 196);
+      margin-top: 12px;
+    }
+  }
+}

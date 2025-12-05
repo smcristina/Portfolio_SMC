@@ -1,0 +1,43 @@
+<main>
+  <div class="header">
+    <h2 class="h2">Pipe Profile</h2>
+    <div class="input-button-container">
+      <!--
+        <input type="text" placeholder="Search by any value" [(ngModel)]="searchTerm" (input)="applyFilter()" />
+        <button class="add-button" (click)="openModal()">+</button>
+      -->
+    </div>
+  </div>
+  <div class="buttons-container">
+    <button (click)="changePipeList('Help Desk')"
+      [ngClass]="activePipeList == 'Help Desk' ? 'selected-button' : 'profile-button'">
+      <i class="fa fa-headphones" aria-hidden="true"></i>
+      <span>
+        Help Desk
+      </span>
+    </button>
+    <button (click)="changePipeList('Dev')" [ngClass]="activePipeList == 'Dev' ? 'selected-button' : 'profile-button'">
+      <i class="fa fa-code" aria-hidden="true"></i>
+      <span>Sviluppatore</span>
+    </button>
+    <button (click)="changePipeList('System')"
+      [ngClass]="activePipeList == 'System' ? 'selected-button' : 'profile-button'">
+      <i class="fa fa-sitemap" aria-hidden="true"></i>
+      <span>
+        Sistemista
+      </span>
+    </button>
+    <button (click)="changePipeList('Network')"
+      [ngClass]="activePipeList == 'Network' ? 'selected-button' : 'profile-button'">
+      <i class="fa fa-microchip" aria-hidden="true"></i>
+      <span>
+        Network
+      </span>
+    </button>
+  </div>
+
+  <app-help-desk-pipe *ngIf="activePipeList == 'Help Desk'"></app-help-desk-pipe>
+  <app-developer-pipe *ngIf="activePipeList == 'Dev'"></app-developer-pipe>
+  <app-network-pipe *ngIf="activePipeList == 'Network'"></app-network-pipe>
+  <app-system-pipe *ngIf="activePipeList == 'System'"></app-system-pipe>
+</main>

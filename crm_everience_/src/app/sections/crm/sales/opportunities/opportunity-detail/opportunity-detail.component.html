@@ -1,0 +1,133 @@
+<main>
+  <div class="header">
+    <h2 class="h2" style="display: flex; align-items: center;">Opportunità <i
+        class="material-icons">chevron_right</i><span>{{opportunity?.unique_speaking_code}}</span> </h2>
+    <div class="input-button-container">
+      <button class="add-button" (click)="navigationBack()">
+        <i class="material-icons" style="font-weight: 600;">arrow_back</i>
+      </button>
+      <button class="add-button" (click)="editOpportunity()"><i class="material-icons">edit</i></button>
+      <button class="convert-button all-action-buttons" (click)="openModal()">Converti</button>
+    </div>
+  </div>
+  <!--Lead data container-->
+  <div class="container" [ngClass]="editing ? 'enabled-input' : 'disabled-input'">
+    <div class="rows">
+      <div>
+        <label>Data Opportunity</label>
+        <input [(ngModel)]="parsedData " class="form-control" id="data-lead" name="data" [disabled]="!editing"
+          type="date">
+      </div>
+      <div>
+        <label>Ragione Sociale</label>
+        <input [(ngModel)]="opportunity.company_name" class="form-control" id="company-name" name="company-name"
+          disabled type="text" style="cursor:not-allowed;">
+      </div>
+      <div>
+        <label>Partita IVA</label>
+        <input [(ngModel)]="opportunity.partita_iva" class="form-control" id="p-iva" name="p-iva" disabled type="text"
+          style="cursor:not-allowed;">
+      </div>
+      <div>
+        <label>Codice Ateco</label>
+        <input [(ngModel)]="opportunity.ateco" class="form-control" id="ateco" name="ateco" disabled type="text"
+          style="cursor:not-allowed;">
+      </div>
+    </div>
+
+    <div class="rows">
+      <div>
+        <label>Referente Cliente</label>
+        @if(opportunity.contact_name == '' || opportunity.contact_name == null){
+        <input [(ngModel)]="opportunity.contact_name" class="form-control" id="contact_name" name="contact_name"
+          disabled type="text" style="cursor:not-allowed"
+          style="cursor:not-allowed; font-style: italic; color: #838081e1;">
+        } @else {
+        <input [(ngModel)]="opportunity.contact_name" placeholder="Non disponibile" class=" form-control"
+          id="contact_name" name="contact_name" disabled type="text">
+        }
+      </div>
+      <div>
+        <label>Ruolo Referente</label>
+        @if(opportunity.contact_role == '' || opportunity.contact_role == null){
+        <input [(ngModel)]="opportunity.contact_role" class="form-control" id="contact_role" name="contact_role"
+          disabled type="text" style="cursor:not-allowed"
+          style="cursor:not-allowed; font-style: italic; color: #838081e1;">
+        } @else {
+        <input [(ngModel)]="opportunity.contact_role" placeholder="Non disponibile" class=" form-control"
+          id="contact_role" name="contact_role" disabled type="text">
+        }
+      </div>
+      <div>
+        <label>Mail Referente</label>
+        @if(opportunity.contact_email == '' || opportunity.contact_email == null){
+        <input [(ngModel)]="opportunity.contact_email" placeholder="Non disponibile" class=" form-control"
+          id="contact_email" name="contact_email" disabled type="text">
+        } @else {
+
+        <input [(ngModel)]="opportunity.contact_email" class="form-control" id="contact_email" name="contact_email"
+          disabled type="text" style="cursor:not-allowed"
+          style="cursor:not-allowed; font-style: italic; color: #838081e1;">
+        }
+      </div>
+      <div>
+        <label>Numero Referente</label>
+        @if(opportunity.contact_phone == '' || opportunity.contact_phone == null){
+
+        <input [(ngModel)]="opportunity.contact_phone" placeholder="Non disponibile" class=" form-control"
+          id="contact_phone" name="contact_phone" disabled type="text">
+        } @else {
+        <input [(ngModel)]="opportunity.contact_phone" class="form-control" id="contact_phone" name="contact_phone"
+          disabled type="text" style="cursor:not-allowed"
+          style="cursor:not-allowed; font-style: italic; color: #838081e1;">
+        }
+      </div>
+    </div>
+
+    <div class="rows">
+      <div>
+        <label>Service Manager</label>
+        <select id="service-manager" (change)="onManagerChange($event)" [(ngModel)]="selectedManager"
+          [disabled]=!editing required>
+
+          <!-- <option *ngIf="isLoadingServiceManager" disabled>Caricamento...  </option> -->
+          <option *ngFor="let manager of serviceManagerList" [value]="manager.id">
+            {{ manager.first_name }} {{ manager.last_name }}
+          </option>
+        </select>
+        <!-- <input [(ngModel)]="opportunity.assigned_service_manager" class="form-control" id="budget" name="budget"
+          [disabled]="!editing" type="text"> -->
+      </div>
+      <div>
+        <label>Tipologia Cliente</label>
+        <input [(ngModel)]="opportunity.silo" class="form-control" id="silo" name="silo" disabled type="text"
+          style="cursor:not-allowed;">
+      </div>
+      <div>
+        <label>Descrizione Attività</label>
+        <!-- <input [(ngModel)]="opportunity.activity_description" class="form-control" id="activity_description"
+          name="activity_description" [disabled]="!editing" type="text"> -->
+        <select (change)="onActivityChange($event)" [(ngModel)]="selectedActivity" class="form-control"
+          [disabled]=!editing required>
+          <option hidden value="" disabled>Seleziona Attività</option>
+          <option value="INFOGERENCE">INFOGERENCE</option>
+          <option value="PROJECTWORKING">PROJECTWORKING</option>
+          <option value="T&M">T&M</option>
+          <option value="DA DEFINIRE">DA DEFINIRE</option>
+        </select>
+      </div>
+      <div>
+        <label>Budget Totale</label>
+        <input [(ngModel)]="opportunity.budget" class="form-control" id="budget" name="budget" [disabled]="!editing"
+          type="number">
+      </div>
+    </div>
+  </div>
+  <div style="width: 100%;">
+    <div class="button-container">
+      <button *ngIf="editing" class="all-action-buttons" (click)="saveChanges()">Salva Modifiche</button>
+    </div>
+  </div>
+
+  <app-convert-opportunity-modal [opportunityId]="id"></app-convert-opportunity-modal>
+</main>

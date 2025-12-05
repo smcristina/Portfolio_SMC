@@ -1,0 +1,181 @@
+<div class="modal-container">
+  <div class="modal">
+    <div class="container">
+      <h3>Converti Opportunità</h3>
+
+      <!-- First Row -->
+      <div class="rows">
+        <div style="width: 20%;">
+          <label for="contract-type">Tipologia di Contratto<span style="color: #DD0555;">*</span></label>
+          <select id="contract-type" [(ngModel)]="newRequest.contract_typology">
+            <option hidden value="" disabled selected style="color: #aaa;">Scegli Tipo di Contratto</option>
+            <option *ngFor="let contract of contractTypes" [value]="contract">{{ contract }}</option>
+          </select>
+          <div class="error-rows">
+            <span *ngIf="missingContractTypology">
+              Inserisci tipologia di contratto
+            </span>
+          </div>
+        </div>
+
+        <div style="width: 20%;">
+          <label for="seniority">Seniority<span style="color: #DD0555;">*</span></label>
+          <select id="seniority" [(ngModel)]="newRequest.employee_seniority">
+            <option hidden value="" disabled selected>Seniority Richiesta</option>
+            <option value="Junior">Junior</option>
+            <option value="Middle">Middle</option>
+            <option value="Senior">Senior</option>
+          </select>
+          <div class="error-rows">
+            <span *ngIf="missingSeniority">
+              Inserisci Seniority
+            </span>
+          </div>
+        </div>
+
+        <div style="width: 20%;">
+          <label for="resources">Risorse Richieste<span style="color: #DD0555;">*</span></label>
+          <input id="resources" type="number" placeholder="Insert quantity" [(ngModel)]="newRequest.resources_quantity">
+          <div class="error-rows">
+            <span *ngIf="missingResourcesQuantity">
+              Inserisci risorse richieste
+            </span>
+          </div>
+        </div>
+
+        <div style="width: 20%;">
+          <label for="budget">Budget</label>
+          <input id="budget" type="number" placeholder="Insert budget" [(ngModel)]="newRequest.budget">
+        </div>
+      </div>
+
+      <!-- Second Row -->
+      <div class="rows">
+        <div style="width: 30%;">
+          <label for="service-duration">Durata del Servizio (mesi)<span style="color: #DD0555;">*</span></label>
+          <input id="service-duration" type="number" placeholder="Quantità di mesi"
+            [(ngModel)]="newRequest.service_duration">
+          <div class="error-rows">
+            <span *ngIf="missingServiceDuration">
+              Inserisci durata del servizio
+            </span>
+          </div>
+        </div>
+
+        <div style="width: 30%;">
+          <label for="week-days">Giorni Lavorativi<span style="color: #DD0555;">*</span></label>
+          <select id="week-days" [(ngModel)]="newRequest.week_working_days">
+            <option value="" disabled hidden>Quantità di Giorni Settimanali</option>
+            <option value="1">1/5</option>
+            <option value="2">2/5</option>
+            <option value="3">3/5</option>
+            <option value="4">4/5</option>
+            <option value="5">5/5</option>
+          </select>
+          <div class="error-rows">
+            <span *ngIf="missingWeekWorkingDays">
+              Inserisci giorni lavorativi
+            </span>
+          </div>
+        </div>
+
+        <div style="width: 30%;">
+          <label for="backfill">Backfill</label>
+          <select id="backfill" [(ngModel)]="newRequest.back_fill">
+            <option [value]="1">Si</option>
+            <option [value]="0">No</option>
+          </select>
+
+        </div>
+      </div>
+
+      <!-- Third Row -->
+      <div class="rows">
+        <div style="width: 30%;">
+          <label for="client">Cliente Finale<span style="color: #DD0555;">*</span></label>
+          <select id="client" [(ngModel)]="newRequest.final_client">
+            <option hidden value="" disabled selected style="color: #aaa;">Scegli un cliente dalla lista</option>
+            <option *ngFor="let client of clients" [value]="client.company_name">{{ client.company_name }}</option>
+          </select>
+          <div class="error-rows">
+            <span *ngIf="missingFinalClient">
+              Inserisci Cliente finale
+            </span>
+          </div>
+        </div>
+
+        <div style="width: 30%;">
+          <label for="address">Indirizzo<span style="color: #DD0555;">*</span></label>
+          <input id="address" type="text" placeholder="Sede di Lavoro" [(ngModel)]="newRequest.address">
+          <div class="error-rows">
+            <span *ngIf="missingAddress">
+              Inserisci Indirizzo
+            </span>
+          </div>
+        </div>
+
+        <div style="width: 30%;">
+          <label for="description">Descrizione</label>
+          <textarea id="description" placeholder="Informazioni aggiuntive"
+            [(ngModel)]="newRequest.description"></textarea>
+        </div>
+      </div>
+
+      <!-- Fourth Row -->
+      <div class="rows">
+        <div style="width: 20%;">
+          <label for="start-date">Data Inizio<span style="color: #DD0555;">*</span></label>
+          <input id="start-date" type="date" [(ngModel)]="newRequest.start_date">
+          <div class="error-rows">
+            <span *ngIf="dateError">
+              {{ dateError }}
+            </span>
+          </div>
+        </div>
+
+        <div style="width: 20%;">
+          <label for="end-date">Data Fine<span style="color: #DD0555;">*</span></label>
+          <input id="end-date" type="date" [(ngModel)]="newRequest.end_date">
+          <div class="error-rows">
+            <span *ngIf="dateError">
+              {{ dateError }}
+            </span>
+          </div>
+        </div>
+
+        <div style="width: 20%;">
+          <label for="clock-in">Clock In</label>
+          <select id="clock-in" [(ngModel)]="newRequest.clock_in">
+            <option hidden value="" disabled selected style="color: #aaa;">8:00</option>
+            <option *ngFor="let time of allowedTimes" [value]="time">{{ time }}</option>
+          </select>
+          <div class="error-rows">
+            <span *ngIf="timeError">
+              {{ timeError }}
+            </span>
+          </div>
+        </div>
+
+        <div style="width: 20%;">
+          <label for="clock-out">Clock Out</label>
+          <select id="clock-out" [(ngModel)]="newRequest.clock_out">
+            <option hidden value="" disabled selected style="color: #aaa;">17:00</option>
+            <option *ngFor="let time of allowedTimes" [value]="time">{{ time }}</option>
+          </select>
+          <div class="error-rows">
+            <span *ngIf="timeError">
+              {{ timeError }}
+            </span>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="button-container">
+        <button (click)="closeModal()" class="all-action-buttons">Indietro</button>
+        <button (click)="convertOpportunity()" class="all-action-buttons">Converti</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+<main>
+  <div class="header">
+    <h2 class="h2">Rubriche</h2>
+    <div class="input-button-container">
+      <input type="text" placeholder="Search by any value" [(ngModel)]="searchTerm" (input)="applyFilter()" />
+      <button class="add-button" (click)="openModal()">+</button>
+    </div>
+  </div>
+  <div class="table-container">
+    
+    <div *ngIf="isLoading">Caricando Contacts...</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <table *ngIf="!isLoading && !error" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"> -->
+      <ng-container matColumnDef="company_name">
+        <th mat-header-cell *matHeaderCellDef > Ragione Sociale </th>
+        <td mat-cell *matCellDef="let contact"  (click)="openDetailedView(contact.id)"> {{ contact.company_name }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contact_name">
+        <th mat-header-cell *matHeaderCellDef> Nome e Cognome </th>
+        <td mat-cell *matCellDef="let contact" (click)="openDetailedView(contact.id)"> {{ contact.contact_name }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contact_email">
+        <th mat-header-cell *matHeaderCellDef> Email</th>
+        <td mat-cell *matCellDef="let contact" (click)="openDetailedView(contact.id)">
+          <span *ngIf="contact.contact_mail !== '' || contact.contact_mail !== null">{{ contact.contact_mail
+            }}</span>
+          <span *ngIf="contact.contact_mail === '' || contact.contact_mail === null" class="unavalaible">Non
+            disponibile</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contact_phone">
+        <th mat-header-cell *matHeaderCellDef> Cellulare </th>
+        <td mat-cell *matCellDef="let contact" (click)="openDetailedView(contact.id)">
+          <span *ngIf="contact.contact_phone !== '' || contact.contact_phone !== null">{{ contact.contact_phone
+            }}</span>
+          <span *ngIf="contact.contact_phone === '' || contact.contact_phone === null" class="unavalaible">Non
+            disponibile</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contact_role">
+        <th mat-header-cell *matHeaderCellDef> Ruolo </th>
+        <td mat-cell *matCellDef="let contact" (click)="openDetailedView(contact.id)">
+          <span *ngIf="contact.contact_role !== '' || contact.contact_role !== null">{{
+            contact.contact_role
+            }}</span>
+          <span *ngIf="contact.contact_role === '' || contact.contact_role === null" class="unavalaible">Non
+            disponibile</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contact_source">
+        <th mat-header-cell *matHeaderCellDef> Fonte </th>
+        <td mat-cell *matCellDef="let contact" (click)="openDetailedView(contact.id)">
+          <span *ngIf="contact.contact_source !== '' || contact.contact_source !== null">{{
+            contact.contact_source
+            }}</span>
+          <span *ngIf="contact.contact_source === '' || contact.contact_source === null" class="unavalaible">Non
+            disponibile</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Modifica</th>
+        <td mat-cell *matCellDef="let contact">
+          <i class="material-icons" (click)='editContact()'>edit</i>
+        </td>
+      </ng-container>
+
+      <!-- COMMENTATO PERCHè VA SOSTITUITO CON ARCHIVIAZIONE -->
+      <!----------------------------------------------------------------------------------------->
+      <!-- <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> Elimina </th>
+        <td mat-cell *matCellDef="let contact" (click)="openConfirmDialog()">
+          <i class="material-icons" style="color: #cc112a;">delete</i>
+        </td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="archive">
+        <th mat-header-cell *matHeaderCellDef> Archivia </th>
+        <td mat-cell *matCellDef="let contact">
+          <i class="material-icons" style=" color: #dd0555;" (click)="openConfirmDialog(contact.id)"> archive </i>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <app-create-contact-modal (contactCreated)="createContact($event)"></app-create-contact-modal>
+
+  <!-- <div style="width: 100%;">
+    <div class="button-container">
+      <button *ngIf="editing" class="all-action-buttons" (click)="changesContact()">Salva Modifiche</button>
+      
+    </div>
+  </div> -->
+
+
+</main>

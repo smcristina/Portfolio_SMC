@@ -1,0 +1,94 @@
+<div class="modal-container">
+  <div class="modal">
+    <h2>Crea Nuova Lead</h2>
+
+    <div class="container">
+      <div class="rows">
+        <div style="width: 30%">
+          <label>Data Lead<span style="color: #DD0555;">*</span>
+          </label>
+          <input [(ngModel)]="newLead.lead_data" type="date" required />
+        </div>
+ 
+        <div style="width: 30%">
+          <label>Cliente<span style="color: #DD0555;">*</span></label>
+          <select (change)="onClientChange($event)" [(ngModel)]="selectedClient" required>
+            <option value="" disabled hidden selected>
+              {{ isLoadingClients ? 'Caricamento clienti...' : 'Seleziona Cliente' }}
+            </option>
+            <option *ngFor="let client of clients" [value]="client?.id">
+              {{ client?.company_name }}
+            </option>
+          </select>
+        </div>
+
+        <div style="width: 30%">
+          <label>Referente Cliente</label>
+          <select (change)="onContactNameChange($event)" [(ngModel)]="selectedContactName" required>
+            <option value="" disabled hidden selected>
+              <!-- {{ isLoadingClients ? 'Caricamento referenti clienti...' : 'Seleziona Referente Cliente' }} -->
+            </option>
+            <option *ngFor="let clientReferente of contacts" [value]="clientReferente?.contact_name"> {{ clientReferente?.contact_name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="rows">
+        <div style="width: 30%">
+          <label>Budget<span style="color: #DD0555;">*</span></label>
+          <input [(ngModel)]="newLead.budget" placeholder="Budget" type="number" step="0.01" required />
+        </div>
+
+        <div style="width: 30%">
+          <label>Descrizione Attività<span style="color: #DD0555;">*</span></label>
+          <select (change)="onActivityChange($event)" [(ngModel)]="selectedActivity" required>
+            <option hidden value="" disabled selected>Seleziona Attività</option>
+            <option value="INFOGERENCE">INFOGERENCE</option>
+            <option value="PROJECTWORKING">PROJECTWORKING</option>
+            <option value="T&M">T&M</option>
+            <option value="DA DEFINIRE">DA DEFINIRE</option>
+          </select>
+        </div>
+
+        <div style="width: 30%">
+          <label>Tipologia Cliente<span style="color: #DD0555;">*</span></label>
+          <select (change)="onSiloChange($event)" [(ngModel)]="selectedSilo" required>
+            <option hidden value="" disabled selected style="color: #aaa;">Scegli Tipo Cliente</option>
+            <option value="Indiretto">Indiretto</option>
+            <option value="Diretto">Diretto</option>
+            <option value="Gruppo">Gruppo</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="rows" style="margin-bottom: 0px !important;">
+        <div style="width: 30%">
+          <label>Owner</label>
+          <!-- <input [(ngModel)]="newLead.owner" placeholder="Chi ha fatto la vendita" /> -->
+          <select (change)="onOwnerChange($event)" [(ngModel)]="selectedOwner" required>
+            <option value="" disabled hidden selected>
+              {{ isLoadingOwners ? 'Caricamento owner...' : 'Seleziona Owner'}}
+            </option>
+            <option *ngFor="let user of users" [value]="user?.id">{{ user?.first_name}}&nbsp;{{user?.last_name}}
+            </option>
+          </select>
+        </div>
+        <div style="width: 60%">
+          <label>Note Aggiuntive</label>
+          <textarea [(ngModel)]="newLead.notes" placeholder="Note aggiuntive..." rows="3"></textarea>
+        </div>
+      </div>
+
+      <div *ngIf="missingFields" class="error-rows">
+        <span>
+          Completa tutti i campi con asterisco
+        </span>
+      </div>
+      <div class="button-container" style="margin-top: 40px !important;">
+        <button (click)="closeModal()" class="all-action-buttons">Cancella</button>
+        <button (click)="createLead()" class="all-action-buttons">Salva</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,180 @@
+<div class="modal-skills-container">
+  <div class="modal" style="max-height: 80vh; overflow-y: auto;">
+
+    <div class="container">
+      <h3>Aggiungi skills per {{employee?.first_name}} {{employee?.last_name}}</h3>
+
+      <div class="skill-rows">
+        <h4>Area di competenza</h4>
+      </div>
+      <div class="skill-rows">
+        <div style="width: 20%;">
+          <select [(ngModel)]="newSkills.area" (change)="onAreaChange()">
+            <option hidden value="" disabled selected>Scegli area di competenza</option>
+            <option value="sviluppatore">sviluppatore</option>
+            <option value="help desk">help desk</option>
+            <option value="sistemista">sistemista</option>
+            <option value="network">network</option>
+          </select>
+        </div>
+      </div>
+      <div class="skill-rows">
+        <h4>Competenze linguistiche</h4>
+      </div>
+      <div class="skill-rows">
+        <div style="width: 30%;">
+          <label>Lingua</label>
+          <select [(ngModel)]="newSkills.skills">
+            <option hidden value="" disabled selected>inglese</option>
+            <option value="inglese">inglese</option>
+          </select>
+        </div>
+        <div style="width: 20%;">
+          <label>valutazione</label>
+          <select [(ngModel)]="newSkills.skills_valuation">
+            <option hidden value="" disabled selected>valutazione</option>
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="B1">B1</option>
+            <option value="B2">B2</option>
+            <option value="C1">C1</option>
+            <option value="C2">C2</option>
+          </select>
+        </div>
+
+        <div style="margin-top: 10px; display: flex; flex-direction: row; justify-content:center; align-items: center;">
+          <label for="miaCheckbox">
+            Conferma:
+          </label>
+          <input type="checkbox" id="miaCheckbox" (change)="onCheckboxChange($event)" name="multipleMode">
+        </div>
+      </div>
+    </div>
+
+    <!--
+    <div class="container">
+      <div class="skill-rows">
+        <div style="position: relative;">
+          <label for="languageInput">Lingua</label>
+          <input id="languageInput" type="text" [(ngModel)]="typedLanguage" (input)="applyFilter(typedLanguage)"
+            placeholder="Scrivi una lingua..." />
+
+        // Dropdown suggerimenti 
+          <select *ngIf="typedLanguage.length >= 2 && filteredLanguages.length > 0"
+            size="{{ filteredLanguages.length }}" (change)="onLanguageSelect($event)">
+            <option *ngFor="let lang of filteredLanguages" [value]="lang">
+              {{ lang }}
+            </option>
+          </select>
+
+
+
+        </div>
+
+        // Select per valutazione 
+        <div style="width: 20%; margin-left: 20px;">
+          <label>Valutazione</label>
+          <select [(ngModel)]="newSkills.skills_valuation"
+            style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+            <option hidden value="" disabled selected>valutazione</option>
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="B1">B1</option>
+            <option value="B2">B2</option>
+            <option value="C1">C1</option>
+            <option value="C2">C2</option>
+          </select>
+        </div>
+        <div style="margin-top: 10px;">
+          <label for="miaCheckbox">
+            Aggiungi alla lista prima di salvare
+          </label>
+          <input type="checkbox" id="miaCheckbox" (change)="onCheckboxChange($event)" name="multipleMode">
+        </div>
+      </div>
+    </div>
+  -->
+
+    <div class="container">
+      <div class="form-group rows">
+        <div style="width: 30%;">
+          <label>Skill</label>
+
+          <!-- Select normale con skills filtrate -->
+          <select *ngIf="!showCustomInput" [(ngModel)]="newSkills.skills" (change)="onSkillChange()"
+            [disabled]="!newSkills.area">
+            <option hidden value="" disabled selected>
+              {{ newSkills.area ? 'Skill' : 'Seleziona prima un\'area' }}
+            </option>
+            <option *ngFor="let skill of getFilteredSkills()" [value]="skill.value">
+              {{ skill.label }}
+            </option>
+            <option value="altro">altro...</option>
+          </select>
+
+          <!-- Input personalizzato per skills -->
+          <input *ngIf="showCustomInput" id="customSkillInput" type="text" [(ngModel)]="customSkill"
+            placeholder="Inserisci skill personalizzata" (blur)="onCustomSkillFinish()" (keypress)="onKeyPress($event)"
+            style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div style="width: 20%;">
+          <label>Valutazione skill</label>
+          <select [(ngModel)]="newSkills.skills_valuation" [disabled]="!newSkills.area">
+            <option hidden value="" disabled selected>Valutazione skill</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+
+        <!-- CHECKBOX sempre visibile in modalità multipla -->
+        <div style="margin-top: 10px; display: flex; flex-direction: row; justify-content:center; align-items: center;">
+          <label for="miaCheckbox">
+            Conferma:
+          </label>
+          <input type="checkbox" id="miaCheckbox" (change)="onCheckboxChange($event)" name="multipleMode">
+        </div>
+      </div>
+
+      <div class="error-rows">
+        <span *ngIf="skillExists == true">
+          Questa skill è già presente per questo dipendente
+        </span>
+      </div>
+    </div>
+
+    <!-- SEZIONE LISTA SKILLS AGGIUNTE -->
+    <div class="skills-list-container" *ngIf="skillsList.length > 0"
+      style="margin-top: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9; width: 85%;">
+      <h4 style="margin-bottom: 15px; color: #333;">Skills da salvare ({{ skillsList.length }})</h4>
+
+      <div class="skills-list" style="max-height: 200px; overflow-y: auto;">
+        <div *ngFor="let skill of skillsList; let i = index" class="skill-item"
+          style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; padding: 8px 12px; margin-bottom: 5px; background-color: white; border: 1px solid #e0e0e0; border-radius: 4px;">
+
+          <div class="skill-info" style="flex: 1;">
+            <span style="font-weight: bold; color: #2c3750;">{{ skill.skills }} : {{ skill.skills_valuation }}</span>
+            <span style="margin-left: 10px; color: #7f8c8d;">Area: {{ skill.area }}</span>
+          </div>
+
+          <button (click)="removeSkillFromList(i)"
+            style="background: #e74c3c; color: white; border: none; border-radius: 3px; padding: 5px 8px; cursor: pointer; font-size: 12px;">
+            x
+          </button>
+        </div>
+      </div>
+
+
+
+      <div class="button-container">
+        <button (click)="closeModal()" class="all-action-buttons" style="width: 120px;">Cancella</button>
+        @if(singleSkill){
+        <button (click)="saveSingleSkill()" class="all-action-buttons" style="width: 120px;">Salva Singola</button>
+        }@else{
+        <button (click)="saveMultipleSkills()" class="all-action-buttons" style="width: 120px;">Salva</button>
+        }
+      </div>
+
+    </div>
+  </div>

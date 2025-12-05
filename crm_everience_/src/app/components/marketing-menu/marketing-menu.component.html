@@ -1,0 +1,21 @@
+<div class="all-menues-container">
+  <nav class="menu">
+    <div>
+      <div class="menu-item" (click)="showSubmenu('Importi')"> Importi </div>
+      <div class="menu-item"> KPI </div>
+      <div class="menu-item" (click)="showSubmenu('Dashboard')"> Dashboard </div>
+    </div>
+  </nav>
+
+  <nav class="sub-menu" [class.active]="subMenuIsVisible">
+    <button (click)="hideSubMenu()" class="compress-btn"><i class="material-icons">close</i></button>
+
+    <div *ngIf="selectedSubMenu == 'Importi'">
+      <div (click)="navigateTo('marketing/budgets')" class="sub-menu-item">Budget</div>
+    </div>
+    <div *ngIf="selectedSubMenu == 'Dashboard'">
+      <div (click)="navigateTo('marketing/dashboard/client-analisys')" class="sub-menu-item">Analisi Clienti</div>
+      <div (click)="navigateTo('marketing/dashboard/commercial-pipe')" class="sub-menu-item">Pipe Commerciale</div>
+    </div>
+  </nav>
+</div>

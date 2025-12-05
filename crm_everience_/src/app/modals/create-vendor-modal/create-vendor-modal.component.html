@@ -1,0 +1,54 @@
+<div class="modal-container">
+  <div class="modal">
+    <h2>Crea Nuovo Fornitore</h2>
+
+    <div class="container">
+      <div class="rows">
+        <div>
+          <label>Vendor Name</label>
+          <input [(ngModel)]="newVendor.vendor_name" placeholder="Vendor Name" type="text" />
+        </div>
+
+        <div>
+          <label>Province</label>
+          <select id="province" (change)="onClientChange($event)">
+            <option hidden value="" disabled selected>Seleziona le provincie</option>
+            <option *ngFor="let province of provinces" [value]="province">{{ province }}</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Service Category</label>
+          <input [(ngModel)]="newVendor.service_category" placeholder="Service Category" type="text" />
+        </div>
+      </div>
+
+      <div class="rows">
+        <div>
+          <label>Standard Daily Cost</label>
+          <input [(ngModel)]="newVendor.standard_daily_cost" type="number" placeholder="Standard Daily Cost" />
+        </div>
+        <div>
+          <label>Maggiorazione Non Feriale</label>
+          <input [(ngModel)]="newVendor.maggiorazione_non_feriale" placeholder="Maggiorazione Non Feriale"
+            type="text" />
+        </div>
+        <div>
+          <label>CM Vendor</label>
+          <input [(ngModel)]="newVendor.cm_vendor" placeholder="CM Vendor" type="text" />
+        </div>
+      </div>
+      <div class="selected-tags">
+        <span *ngFor="let province of selectedProvinces" class="tag">
+          {{ province }}
+          <button (click)="removeProvince(province)">x</button>
+        </span>
+      </div>
+
+      <div class="button-container">
+        <button (click)="closeModal()" class="all-action-buttons">Cancella</button>
+        <button (click)="createVendor()" class="all-action-buttons">Salva</button>
+      </div>
+    </div>
+  </div>
+</div>

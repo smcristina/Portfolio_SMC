@@ -1,0 +1,166 @@
+
+<div class="modal-edit-container" *ngIf="employee">
+  <div class="modal">
+    <h2>Modifica Dipendente</h2>
+ 
+    <div class="container">
+      <div class="rows">
+        <div>
+          <label for="first_name">Nome</label>
+            <input [(ngModel)]="employee.first_name" id="first_name" name="first_name" placeholder="Nome" type="text" disabled />
+        </div>
+
+        <div>
+          <label for="last_name">Cognome</label>
+            <input [(ngModel)]="employee.last_name" id="last_name" name="last_name" placeholder="Cognome" type="text" disabled />
+        </div>
+
+        <div>
+          <label for="personal_email">Email personale</label>
+            <input [(ngModel)]="employee.personal_email" id="personal_email" name="personal_email" placeholder="Email" type="email"/>
+        </div>
+
+        <div>
+          <label for="phone">Telefono</label>
+            <input [(ngModel)]="employee.phone" id="phone" name="phone" placeholder="Numero di telefono" type="tel"/>
+        </div>
+      </div>
+
+      <div class= "rows">
+        <div>
+          <label for="cost">Costo giornaliero (€)</label>
+            <input [(ngModel)]="employee.cost" id="cost" name="cost" placeholder="Costo giornaliero" type="number" step="0.01"/>
+        </div>
+        <div>
+          <label for="birth_date">Data di Nascita</label>
+            <input [(ngModel)]="formattedDate" id="birth_date" name="birth_date" type="date"/>
+
+        </div>
+        <div>
+          <label for="birth_place">Luogo di Nascita</label>
+            <input [(ngModel)]="employee.birth_place" id="birth_place" name="birth_place" placeholder="Luogo di Nascita" type="text"/>
+        </div>
+        <div>
+          <label for="codice_fiscale">Codice Fiscale</label>
+            <input [(ngModel)]="employee.codice_fiscale" id="codice_fiscale" name="codice_fiscale" placeholder="Codice Fiscale" type="text"/>
+        </div>
+      </div>
+
+      <div class= "rows">
+        <div>
+          <label for="years_of_experience">Anni di Esperienza</label>
+            <input [(ngModel)]="employee.years_of_experience" id="years_of_experience" name="years_of_experience" placeholder="Anni di esperienza" type="number"/>
+        </div>
+        <div>
+          <label for="seniority">Seniority</label>
+            <select id="seniority" (change)="onSeniorityChange($event)" [(ngModel)]="employee.seniority">
+              <option hidden value="" disabled selected>Scegli una Seniority</option>
+              <option *ngFor="let seniority of seniorityList" [value]="seniority">{{ seniority }}</option>
+          </select>
+          <!-- placeholder="Junior / Middle / Senior" -->
+          <!-- va bene così oppure lo faccio tutto da html? chiedere a Paula -->
+        </div>
+        <div>
+          <label for="domicile_address">Indirizzo di Domicilio</label>
+            <input [(ngModel)]="employee.domicile_address" id="domicile_address" name="domicile_address" placeholder="Indirizzo di domicilio" type="text"/>
+        </div>
+        <div>
+          <label for="residence_address">Indirizzo di Residenza</label>
+            <input [(ngModel)]="employee.residence_address" id="residence_address" name="residence_address" placeholder="Indirizzo di residenza" type="text"/>
+        </div>
+      </div>
+
+      <div class="rows">
+        <div>
+          <label for="domicile_province">Provincia di Domicilio</label>
+            <input [(ngModel)]="employee.domicile_province" id="domicile_province" name="domicile_province" placeholder="Indirizzo di provincia" type="text"/>
+        </div>
+        <div>
+          <label for="residence_province">Provincia di Residenza</label>
+            <input [(ngModel)]="employee.residence_province" id="residence_province" name="residence_province" placeholder="Indirizzo di residenza" type="text"/>
+        </div>
+        <div>
+          <label for="domicile_zip_code">CAP domicilio</label>
+            <input [(ngModel)]="employee.domicile_zip_code" id="domicile_zip_code" name="domicile_zip_code" placeholder="Codice Postale di domicilio" type="text"/>
+        </div>
+        <div>
+          <label for="residence_zip_code">CAP residenza</label>
+            <input [(ngModel)]="employee.residence_zip_code" id="residence_zip_code" name="residence_zip_code" placeholder="Codice Postale di residenza" type="text"/>
+        </div>
+      </div>
+
+      <div class="rows">
+        <div>
+          <label for="client">Cliente</label>
+            <input [(ngModel)]="employee.client" id="client" name="client" placeholder="Cliente" type="text"/>
+        </div>
+        <div>
+          <label for="notes">Note</label>
+            <input [(ngModel)]="employee.notes" id="notes" name="notes" placeholder="Note" type="text"/>
+        </div>
+        <div>
+          <label>Automunito</label>
+          <input [(ngModel)]="employee.has_vehicle" type="checkbox" id="has_vehicle" name="has_vehicle" />
+        </div>
+        <div>
+          <label>Patentato</label>
+          <input [(ngModel)]="employee.has_driver_license" type="checkbox" id="has_driver_license" name="has_driver_license" />
+        </div>
+        <div>
+          <label>Disponibile</label>
+          <input [(ngModel)]="employee.availability" type="checkbox" id="availability" name="availability" />
+        </div>
+      </div>
+
+      <div class="rows">
+        <div>
+          <label for="cm_employee">Codice dipendente CM</label>
+            <input [(ngModel)]="employee.cm_employee" id="cm_employee" name="cm_employee" placeholder="Note" type="text"/>
+        </div>
+        <div>
+          <label for="final_client">Cliente Finale</label>
+            <input [(ngModel)]="employee.final_client" id="final_client" name="final_client" placeholder="Cliente Finale" type="text"/>
+        </div>
+        <div>
+          <label for="communication_skills">Comunicazione</label>
+            <select  (change)="onCommunicationChange($event)" [(ngModel)]="employee.communication_skills" class="form-control">
+              <option hidden value="" disabled selected>Seleziona valore</option>
+              <option value = 0>0</option>
+              <option value = 1>1</option>
+              <option value = 2>2</option>
+              <option value = 3>3</option>
+            </select>
+          <!-- <input [(ngModel)]="modifyEmployee.communication_skills" id="communication_skills" placeholder="Comunicazione" min="1" max="5" type="number"/> -->
+        </div>
+        <div>
+          <label for="autonomy">Autonomia</label>
+            <select  (change)="onAutonomyChange($event)" [(ngModel)]="employee.autonomy" class="form-control">
+              <option hidden value="" disabled selected>Seleziona valore</option>
+              <option value = 0>0</option>
+              <option value = 1>1</option>
+              <option value = 2>2</option>
+              <option value = 3>3</option>
+            </select>
+        </div>
+        <div>
+          <label for="Standing">Standing</label>
+            <select (change)="onStandingChange($event)" [(ngModel)]="employee.standing" class="form-control">
+              <option hidden value="" disabled selected>Seleziona valore</option>
+              <option value = 0>0</option>
+              <option value = 1>1</option>
+              <option value = 2>2</option>
+              <option value = 3>3</option>
+            </select>
+        </div>
+      </div>
+      
+    </div>
+    <div style="width: 100%;">
+        <div class="button-container">
+            <button class ="all-action-buttons" (click)="closeModal()">Cancella</button>
+            <button class="all-action-buttons" (click)="saveChanges(employee.id)">Salva Modifiche</button>
+        </div>
+    </div>
+  </div>
+  </div>
+            

@@ -1,0 +1,138 @@
+<main>
+  <div class="header">
+    <h2 class="h2" style="display: flex; align-items: center;">Lead <i
+        class="material-icons">chevron_right</i><span>{{lead.unique_speaking_code}}</span> </h2>
+    <div class="input-button-container">
+      <button class="add-button" (click)="navigationBack()">
+        <i class="material-icons" style="font-weight: 600;">arrow_back</i>
+      </button>
+      <button class="add-button" (click)="editLead()" *ngIf="lead.archived === 0"><i
+          class="material-icons">edit</i></button>
+      <button class="convert-button all-action-buttons" (click)="openModal()"
+        *ngIf="lead.archived === 0">Converti</button>
+    </div>
+  </div>
+  <!--Lead data container-->
+  <div class="container content-box" [ngClass]="editing ? 'enabled-input' : 'disabled-input'">
+    <div class="rows">
+      <div>
+        <label for="data-lead">Data</label>
+        <input [(ngModel)]="parsedData" class="form-control" id="data-lead" name="data" [disabled]="!editing"
+          type="date">
+      </div>
+      <div>
+        <label for="company-name">Ragione Sociale</label>
+        <select (change)="onClientChange($event)" [(ngModel)]="selectedClient" class="form-control" [disabled]=!editing
+          required>
+          <option value="0" disabled>
+            {{ isLoadingClients ? 'Caricamento clienti...' : 'Seleziona Cliente' }}
+          </option>
+          <option *ngFor="let client of clients" [value]="client?.id">
+            {{ client?.company_name }}
+          </option>
+        </select>
+        <!-- <input [(ngModel)]="lead.company_name" class="form-control" id="company-name" name="company-name"
+          [disabled]="!editing" type="text"> -->
+      </div>
+      <div>
+        <label for="silo">Tipologia Cliente</label>
+        <!-- <input [(ngModel)]="lead.silo" class="form-control" id="silo" name="silo" [disabled]="!editing" type="text"> -->
+        <select (change)="onSiloChange($event)" [(ngModel)]="selectedSilo" [disabled]=!editing required>
+          <option value="" disabled>Seleziona Silo</option>
+          <option value="Indiretto">Indiretto</option>
+          <option value="Diretto">Diretto</option>
+          <option value="Gruppo">Gruppo</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- non funziona disabled -->
+
+    <div class="rows">
+      <div>
+        <label for="contact_name">Referente Cliente</label>
+        @if(lead.contact_role == '' || lead.contact_role == null){
+        <input [(ngModel)]="lead.contact_name" class="form-control" id="contact_name" name="contact_name" disabled
+          type="text" style="cursor:not-allowed" placeholder="Non disponibile"
+          style="cursor:not-allowed; font-style: italic; color: #838081e1;">
+        } @else {
+        <input [(ngModel)]="lead.contact_name" class=" form-control" id="contact_email" name="contact_email" disabled
+          type="text">
+        }
+      </div>
+      <div>
+        <label for="contact_role">Ruolo Referente</label>
+        @if(lead.contact_role == '' || lead.contact_role == null){
+        <input [(ngModel)]="lead.contact_role" class="form-control" id="contact_role" name="contact_role" disabled
+          type="text" placeholder="Non disponibile" style="cursor:not-allowed;  font-style: italic; color: #838081e1;">
+        } @else{
+        <input [(ngModel)]="lead.contact_role" class=" form-control" id="contact_email" name="contact_email" disabled
+          type="text" style="cursor:not-allowed;">
+        }
+
+      </div>
+      <div>
+        <label for="contact_email">Mail Referente</label>
+        @if(lead.contact_email == '' || lead.contact_email == null){
+        <input [(ngModel)]="lead.contact_email" placeholder="Non disponibile" class="form-control" id="contact_email"
+          name="contact_email" disabled type="text" style="cursor:not-allowed; font-style: italic; color: #838081e1;">
+        }
+        @else{
+        <input [(ngModel)]="lead.contact_email" class="form-control" id="contact_email" name="contact_email" disabled
+          type="text" style="cursor:not-allowed;">
+        }
+      </div>
+    </div>
+
+    <div class="rows">
+      <div>
+        <label for="contact_phone">Numero Referente</label>
+        @if(lead.contact_phone == '' || lead.contact_phone == null){
+        <input [(ngModel)]="lead.contact_phone" placeholder="Non disponibile" class="form-control" id="contact_phone"
+          name="contact_phone" disabled type="text" style="cursor:not-allowed; font-style: italic; color: #838081e1;">
+        }
+        @else{
+        <input [(ngModel)]="lead.contact_phone" class="form-control" id="contact_phone" name="contact_phone" disabled
+          type="text" style="cursor:not-allowed;">
+        }
+      </div>
+      <div>
+        <label for="activity_description">Descrizione Attività</label>
+        <!-- <input [(ngModel)]="lead.silo" class="form-control" id="activity_description" name="activity_description"
+          [disabled]="!editing" type="text"> -->
+        <select (change)="onActivityChange($event)" [(ngModel)]="selectedActivity" class="form-control"
+          [disabled]=!editing required>
+          <option hidden value="" disabled>Seleziona Attività</option>
+          <option value="INFOGERENCE">INFOGERENCE</option>
+          <option value="PROJECTWORKING">PROJECTWORKING</option>
+          <option value="T&M">T&M</option>
+          <option value="DA DEFINIRE">DA DEFINIRE</option>
+        </select>
+      </div>
+      <div>
+        <label for="budget">Budget</label>
+        <input [(ngModel)]="lead.budget" class="form-control" id="budget" name="budget" [disabled]="!editing"
+          type="number">
+      </div>
+    </div>
+    <div class="rows">
+      <div style="width: 30%;">
+        <label for="last-data">Ultima data attiva:</label>
+        <input [(ngModel)]="parsedLastData" class="form-control" id="budget" name="budget" [disabled]="!editing"
+          type="date">
+      </div>
+      <div style="width: 60%;">
+        <label for="notes">Notes:</label>
+
+        <input [(ngModel)]="lead.notes" class="form-control" id="notes" name="notes" [disabled]="!editing" type="text"
+          placeholder="Non ci sono descrizione aggiuntive">
+      </div>
+    </div>
+  </div>
+  <div style="width: 100%;">
+    <div class="button-container">
+      <button *ngIf="editing" class="all-action-buttons" (click)="saveChanges()">Salva Modifiche</button>
+    </div>
+  </div>
+  <app-convert-lead-modal></app-convert-lead-modal>
+</main>

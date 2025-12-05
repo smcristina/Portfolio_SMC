@@ -1,0 +1,19 @@
+main {
+  margin-top: 20px;
+  height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+}
+
+.table-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-top: 15px;
+  max-height: 75%;
+}
+td {
+  cursor: pointer;
+  i {
+    color: #dd0555;
+  }
+}

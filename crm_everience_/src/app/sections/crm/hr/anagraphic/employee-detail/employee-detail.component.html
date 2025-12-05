@@ -1,0 +1,309 @@
+<main>
+  <button class="back-button">
+    <img src="../../../../../../assets/arrow-back.png" alt="back-button" width="35px" (click)="navigateBack()">
+  </button>
+  <div class="timeline-card">
+    <div class="header">
+      <div class="circle">
+        <!--
+          <img src={{randomImg}} alt="">
+          -->
+        <span>
+          {{slicedName}}{{slicedSurname}}
+        </span>
+
+      </div>
+    </div>
+    <div class="clipped">
+      <div class="anagraphic">
+        <!--Anagraphic Data-->
+        <h5>Anagrafica</h5>
+        <div class="icon-data-container">
+          <div class="icon-data">
+            <!--Name-->
+            <div class="icon-bg">
+              <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            </div>
+            <p><span>Nome:</span> {{employee.first_name}} {{employee.last_name}}</p>
+          </div>
+          <!--Age-->
+          <div class="icon-data">
+            <div class="icon-bg">
+              <i class="fa fa-calendar-o" aria-hidden="true"></i>
+            </div>
+            <p><span>Età:</span> {{employeeAge}}</p>
+          </div>
+          <!--Seniority-->
+          <div class="icon-data">
+            <div class="icon-bg">
+              <i class="fa fa-briefcase" aria-hidden="true"></i>
+            </div>
+            <p><span>Seniority:</span> {{employee.seniority}}</p>
+          </div>
+          <!--Has vehicle-->
+          <div class="icon-data">
+            <div class="icon-bg">
+              <i class="fa fa-car" aria-hidden="true"></i>
+            </div>
+            <p *ngIf="employee.has_vehicle === 1"><span>Automunito: </span><span style="color: green;">✔</span></p>
+            <p *ngIf="employee.has_vehicle !== 1"><span>Automunito: </span><span style="color: rgb(202, 8, 8);">✘</span>
+            </p>
+          </div>
+          <!--Address-->
+          <div class="icon-data">
+            <div class="icon-bg">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+            </div>
+            <p><span>Domicilio:</span> {{employee.domicile_address}}</p>
+          </div>
+          <!--Cost-->
+          <div class="icon-data">
+            <div class="icon-bg">
+              <i class="fa fa-eur"></i>
+            </div>
+            <p><span>Costo: </span>
+              <span
+                style="background-color: #fab7169e; color: #292929; padding: 2px; border-radius: 3px;">{{employee.cost
+                |
+                currency: 'EUR'}}
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <!--Contract Data-->
+        <h5>Contratto</h5>
+        <div class="icon-data-container">
+          <div class="icon-data">
+            <!--Client-->
+            <div class="icon-bg">
+              <i class="fa fa-briefcase" aria-hidden="true"></i>
+            </div>
+            <p><span>Cliente:</span> {{employee.client}}</p>
+          </div>
+          <!--Final Client-->
+          <div class="icon-data">
+            <div class="icon-bg">
+              <i class="fa fa-building" aria-hidden="true"></i>
+            </div>
+            <p><span>Cliente Finale:</span> {{employee.final_client}}</p>
+          </div>
+          <!--Start-->
+          <div class="icon-data">
+            <div class="icon-bg">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+            </div>
+            <p><span>Data Inizio:</span> {{employee.start_date ? (employee.start_date | date:'dd/MM/yyyy'): 'Non disponibile'}}</p>
+          </div>
+          <!--End-->
+          <div class="icon-data">
+            <div class="icon-bg">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+            </div>
+            <p><span>Data Fine:</span> {{employee.end_date ? (employee.end_date | date:'dd/MM/yyyy'): 'Non disponibile'}}</p>
+          </div>
+
+        </div>
+      </div>
+      <div class="skills">
+        <h5> Soft Skills</h5>
+        <div class="icon-data-container">
+          <div class="icon-data">
+            <!--Name-->
+            <div class="icon-bg">
+              <i class="fa fa-laptop" aria-hidden="true"></i>
+            </div>
+            <p><span>Autonomia:</span> {{employee.autonomy}}</p>
+          </div>
+          <!--Age-->
+          <div class="icon-data">
+            <div class="icon-bg">
+              <i class="fa fa-commenting-o" aria-hidden="true"></i>
+            </div>
+            <p><span>Comunicazione:</span> {{employee.communication_skills}}</p>
+          </div>
+          <!--Seniority-->
+          <div class="icon-data">
+            <div class="icon-bg">
+              <i class="fa fa-language" aria-hidden="true"></i>
+            </div>
+            <p><span>Inglese: </span>
+              <!-- <span *ngIf="employee.english == 1" style="font-weight: 400;">Base</span>
+              <span *ngIf="employee.english == 2" style="font-weight: 400;">Intermedio</span>
+              <span *ngIf="employee.english == 3" style="font-weight: 400;">Avanzato</span> -->
+               {{employeeEnglish}}</p>
+
+          </div>
+          <!--Has vehicle-->
+          <div class="icon-data">
+            <div class="icon-bg">
+              <i class="fa fa-smile-o" aria-hidden="true"></i>
+            </div>
+            <p><span>Standing: </span> {{employee.standing}}</p>
+          </div>
+
+        <div class="icon-data">
+            <div class="icon-bg">
+              <i class="fa fa-language" aria-hidden="true"></i>
+            </div>
+            <p><span>Lingue: </span>
+               {{employeeLanguage}}</p>
+          </div>
+        </div>  
+
+        <h5>Hard Skills</h5>
+          <div class="icon-data-container">
+            <div class="hard-skills" *ngFor="let skill of employeeSkillsList">
+              <div class="skill-row">
+                <span>{{skill.skills}}</span>
+                <div class="dots">
+                  <div class="point" [ngClass]="skill.skills_valuation >= 1 ? 'full' : 'empty'"></div>
+                  <div class="point" [ngClass]="skill.skills_valuation >= 2 ? 'full' : 'empty'"></div>
+                  <div class="point" [ngClass]="skill.skills_valuation >= 3 ? 'full' : 'empty'"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!--Microsoft-->
+          <!-- <div class="hard-skills">
+            <div class="skill-row">
+              <span>Microsoft:</span>
+              <div class="dots">
+                <div class="point" [ngClass]="employee.microsoft >= 1 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.microsoft >= 2 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.microsoft >= 3 ? 'full' : 'empty'"></div>
+              </div>
+            </div>
+          </div> -->
+
+          <!--Linux-->
+          <!-- <div class="hard-skills"> -->
+            <!-- Linux -->
+            <!-- <div class="skill-row">
+              <span>Linux:</span>
+              <div class="dots">
+                <div class="point" [ngClass]="employee.linux >= 1 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.linux >= 2 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.linux >= 3 ? 'full' : 'empty'"></div>
+              </div>
+            </div> -->
+
+            <!-- Storage -->
+            <!-- <div class="skill-row">
+              <span>Storage:</span>
+              <div class="dots">
+                <div class="point" [ngClass]="employee.storage >= 1 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.storage >= 2 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.storage >= 3 ? 'full' : 'empty'"></div>
+              </div>
+            </div> -->
+
+            <!-- VMware -->
+            <!-- <div class="skill-row">
+              <span>VMware:</span>
+              <div class="dots">
+                <div class="point" [ngClass]="employee.wmware >= 1 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.wmware >= 2 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.wmware >= 3 ? 'full' : 'empty'"></div>
+              </div>
+            </div> -->
+
+            <!-- Frontend -->
+            <!-- <div class="skill-row">
+              <span>Frontend:</span>
+              <div class="dots">
+                <div class="point" [ngClass]="employee.frontend_level >= 1 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.frontend_level >= 2 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.frontend_level >= 3 ? 'full' : 'empty'"></div>
+              </div>
+            </div> -->
+
+            <!-- Backend -->
+            <!-- <div class="skill-row">
+              <span>Backend:</span>
+              <div class="dots">
+                <div class="point" [ngClass]="employee.backend_level >= 1 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.backend_level >= 2 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.backend_level >= 3 ? 'full' : 'empty'"></div>
+              </div>
+            </div> -->
+
+            <!-- ITSM -->
+            <!-- <div class="skill-row">
+              <span>ITSM:</span>
+              <div class="dots">
+                <div class="point" [ngClass]="employee.itsm >= 1 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.itsm >= 2 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.itsm >= 3 ? 'full' : 'empty'"></div>
+              </div>
+            </div> -->
+
+            <!-- Active Directory -->
+            <!-- <div class="skill-row">
+              <span>AD:</span>
+              <div class="dots">
+                <div class="point" [ngClass]="employee.ad >= 1 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.ad >= 2 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.ad >= 3 ? 'full' : 'empty'"></div>
+              </div>
+            </div> -->
+
+            <!-- Office -->
+            <!-- <div class="skill-row">
+              <span>Office:</span>
+              <div class="dots">
+                <div class="point" [ngClass]="employee.office >= 1 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.office >= 2 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.office >= 3 ? 'full' : 'empty'"></div>
+              </div>
+            </div> -->
+
+            <!-- Network -->
+            <!-- <div class="skill-row">
+              <span>Network:</span>
+              <div class="dots">
+                <div class="point" [ngClass]="employee.network >= 1 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.network >= 2 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.network >= 3 ? 'full' : 'empty'"></div>
+              </div>
+            </div> -->
+
+            <!-- MDM -->
+            <!-- <div class="skill-row">
+              <span>MDM:</span>
+              <div class="dots">
+                <div class="point" [ngClass]="employee.mdm >= 1 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.mdm >= 2 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.mdm >= 3 ? 'full' : 'empty'"></div>
+              </div>
+            </div> -->
+
+            <!-- Hardware -->
+            <!-- <div class="skill-row">
+              <span>HW:</span>
+              <div class="dots">
+                <div class="point" [ngClass]="employee.hw >= 1 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.hw >= 2 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.hw >= 3 ? 'full' : 'empty'"></div>
+              </div>
+            </div> -->
+
+            <!-- Software -->
+            <!-- <div class="skill-row">
+              <span>SW:</span>
+              <div class="dots">
+                <div class="point" [ngClass]="employee.sw >= 1 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.sw >= 2 ? 'full' : 'empty'"></div>
+                <div class="point" [ngClass]="employee.sw >= 3 ? 'full' : 'empty'"></div>
+              </div>
+            </div>
+          </div>-->
+        <!-- </div>  -->
+
+
+      </div>
+    </div>
+  </div>
+</main>

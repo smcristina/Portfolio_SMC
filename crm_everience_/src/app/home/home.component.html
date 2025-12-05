@@ -1,0 +1,46 @@
+<section *ngIf="showNavigation">
+  <div class="header">
+    <div class="theme-toggle">
+      <button (click)="toggleTheme()" [ngClass]="currentTheme == 'light' ? 'moon-background' : 'sun-background'">
+        <i *ngIf="currentTheme == 'dark'" class="material-icons" style="color: #FAB716;">light_mode</i>
+        <i *ngIf="currentTheme == 'light'" class="material-icons" style="color: #ece6d3;">dark_mode</i>
+      </button>
+    </div>
+  </div>
+
+  <div class="main-content">
+
+    <div class="sections-container">
+      <div class="card" style="background-image: url(../../assets/images/crm1.webp);" (click)="navigateTo('crm')">
+        <span>
+          CRM
+        </span>
+        <!--
+          <img src="../../assets/crm.png" alt="CRM Icon" class="card-icon" />
+          <h3 class="card-title">CRM</h3>
+        -->
+      </div>
+
+      <div class="card" style="background-image: url(../../assets/images/contracts.webp);"
+        (click)="navigateTo('contracts')">
+        <span>
+          Contratti
+        </span>
+        <!--
+        <img src="../../assets/cooperation.png" alt="CRM Icon" class="card-icon" />
+        <h3 class="card-title">Contratti</h3>
+        -->
+      </div>
+      <div class="card" style="background-image: url(../../assets/images/marketing.webp);"
+        (click)="navigateTo('marketing')">
+        <span>
+          Marketing
+        </span>
+        <!--
+        <img src="../../assets/shopping-online.png" alt="CRM Icon" class="card-icon" />
+        <h3 class="card-title">Marketing</h3>
+        -->
+      </div>
+    </div>
+  </div>
+</section>

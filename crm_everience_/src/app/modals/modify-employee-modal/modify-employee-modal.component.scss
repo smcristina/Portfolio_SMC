@@ -1,0 +1,47 @@
+.modal {
+  width: 70%;
+  height: 85vh;
+
+  .rows {
+    div {
+      width: 90%;
+    }
+    input, select {
+      width: 89%;
+      padding: 7px 5px 7px 5px;
+      border: 1px solid rgba(128, 128, 128, 0.5294117647);
+      border-radius: 5px;
+    }
+  }
+  .container {
+    width: 95%;
+    max-height: 90%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 25px;
+    @media (max-width: 1600px) {
+      padding-top: 125px;
+    }
+    @media (min-width: 1601px) {
+      padding-top: 25px;
+    }
+  }
+  .error-rows {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    span {
+      width: 93%;
+      margin-top: 5px;
+      margin-left: 5px;
+      font-size: 13px;
+      background-color: #dd05545d;
+      color: #74042d;
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+  }
+}

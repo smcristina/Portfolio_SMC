@@ -1,0 +1,91 @@
+<main *ngIf="!contract">
+  Caricando dati contratti
+</main>
+<main *ngIf="contract">
+  <div class="header">
+    <h2 class="h2" style="display: flex; align-items: center;">
+      Contratto <i class="material-icons">chevron_right</i>
+      <span>{{ contract.unique_speaking_code }}</span>
+    </h2>
+    <button class="add-button" (click)="export()" style="margin-left: 5px;" matTooltip="Exportare il contratto in PDF"
+      matTooltipPosition="below" style="background-color: #DD0555;">
+      <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <!-- Lead data container -->
+  <div class="container content-box" #pdfContent>
+
+    <div class="img-container">
+      <img src="../../../../../../assets/logo.png" alt="">
+    </div>
+    <!--Old hexagonal company name container
+    <div class="divider">
+    </div>
+    <div class="company">
+      {{contract.company_name}}
+    </div>
+    -->
+
+    <div class="section">
+      <div style="display: flex; flex-direction: row; align-items: baseline;
+    padding-bottom: 5px;">
+        <span style="margin-right: 10px;
+    font-size: 30px;">Proposta per:</span>
+        <h2>{{contract.company_name}}</h2>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Informazioni Generali</h3>
+      <div class="grid">
+        <div><label>Data Richiesta:</label> {{ formattedDateRequest | date:'dd/MM/YYYY'}}</div>
+        <div><label>Partita IVA:</label> {{ contract.partita_iva }}</div>
+        <div><label>Tipologia Contratto:</label> {{ contract.contract_typology }}</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Contatti</h3>
+      <div class="grid">
+        <div><label>Referente Cliente:</label> {{ contract.sales_owner }}</div>
+        <div><label>Mail Referente:</label> {{ contract.contact_email }}</div>
+        <div><label>Numero Referente:</label> {{ contract.contact_phone }}</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Servizio</h3>
+      <div class="grid">
+        <div><label>Service Manager:</label> {{ serviceManager.first_name }} {{ serviceManager.last_name }}</div>
+        <!-- <div><label>Recruiter Assegnato:</label> {{ contract.assigned_recruiter }}</div> -->
+        <div><label>Risorse Richieste:</label> {{ contract.resources_quantity }}</div>
+        <div><label>Indirizzo:</label> {{ contract.address }}</div>
+        <div><label>Giorni Lavorativi:</label> {{ contract.week_working_days }} giornate a settimana</div>
+        <div><label>Durata Servizio:</label> {{ contract.service_duration }} mesi</div>
+        <div><label>Backfill:</label> {{ backFill }}</div>
+        <div><label>Attività:</label> {{ contract.activity_description }}</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Dettagli Orari</h3>
+      <div class="grid">
+        <div><label>Orario di Ingresso:</label> {{ contract.clock_in }}</div>
+        <div><label>Orario di Uscita:</label> {{ contract.clock_out }}</div>
+        <div><label>Data Inizio:</label> {{ formattedStartDate | date:'dd/MM/YYYY' }}</div>
+        <div><label>Data Fine:</label> {{ formattedEndDate | date:'dd/MM/YYYY'}}</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Descrizione</h3>
+      <div class="description-box">
+        <span *ngIf="contract.description">{{ contract.description }}</span>
+        <span *ngIf="!contract.description" class="muted">Non ci sono note aggiuntive</span>
+      </div>
+    </div>
+
+  </div>
+
+</main>

@@ -1,0 +1,30 @@
+.selected-tags {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  span {
+    background-color: #dd05557d;
+    padding: 5px;
+    border-radius: 5px;
+    color: #570121;
+    font-size: 13px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    button {
+      font-size: 11px;
+      margin-left: 4px;
+      border: none;
+      background-color: #d05555;
+      border-radius: 2px;
+      color: #4f1e1e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 15px;
+      height: 15px;
+    }
+  }
+}

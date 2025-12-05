@@ -1,0 +1,19 @@
+main {
+  margin-top: 20px;
+  height: 100vh; /* or a fixed height like 90vh */
+  display: flex;
+  flex-direction: column;
+}
+
+.table-container {
+  max-height: 70vh;
+  overflow-y: auto;
+  margin-top: 20px;
+}
+table {
+  min-width: 100%;
+}
+
+td {
+  cursor: pointer;
+}

@@ -1,0 +1,52 @@
+<div class="modal-container">
+  <div class="modal">
+    <h2>Converti Lead</h2>
+
+    <div class="container">
+
+      <div class="rows">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+
+          <div>
+            <label for="service-manager">Service Manager Assegnato<span style="color: #DD0555;">*</span></label>
+            <select id="service-manager" (change)="onManagerChange($event)" [(ngModel)]="selectedManager">
+              <option value="" disabled>Service Manager</option>
+              <option *ngIf="isLoadingServiceManager" disabled>Caricamento... </option>
+              <option *ngFor="let manager of serviceManagerList" [value]="manager.id">
+                {{ manager.first_name }} {{ manager.last_name }}
+              </option>
+            </select>
+          </div>
+          <div class="error-rows">
+            <span *ngIf="missingSM">
+              Scegli un Service Manager
+            </span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center;">
+
+          <div>
+            <label for="activity">Nuovo Cliente</label>
+            <select id="activity" (change)="onActivityChange($event)" [(ngModel)]="selectedOption">
+              <option value="" disabled>Nuovo Cliente</option>
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="error-rows">
+            <span *ngIf="missingContractData">
+              Indica se è un nuovo contratto
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="button-container">
+        <button (click)="closeModal()" class="all-action-buttons">Indietro</button>
+        <button (click)="convertLead()" class="all-action-buttons">Converti</button>
+      </div>
+    </div>
+  </div>
+</div>
