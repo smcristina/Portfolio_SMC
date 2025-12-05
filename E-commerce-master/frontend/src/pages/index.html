@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artigianato Online</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/components/navbar.css">
+    <link rel="stylesheet" href="../styles/components/hero.css">
+    <link rel="stylesheet" href="../styles/components/products.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <!-- Brand del sito -->
+            <div class="nav-brand">
+                <a href="index.html">Artigianato Online</a>
+            </div>
+    
+            <!-- Icona di toggle per il menu mobile -->
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+    
+            <!-- Lista dei link del menu -->
+            <ul class="nav-menu">
+                <li><a href="products.html">Prodotti</a></li>
+                <li><a href="categories.html">Categorie</a></li>
+                <li>
+                    <a href="cart.html" class="cart-button">
+                        Carrello <span class="cart-count">(0)</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>    
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Scopri l'Arte dell'Artigianato Italiano</h1>
+            <p>Prodotti unici realizzati da artigiani locali</p>
+            <button class="btn btn-primary">Esplora la Collezione</button>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <div class="filters-section">
+        <div class="container">
+            <div class="filters-grid">
+                <!-- Filtro per categoria -->
+                <div class="filter-group">
+                    <label for="categoryFilter">Categoria</label>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="">Tutte le categorie</option>
+                        <option value="ceramica">Ceramica</option>
+                        <option value="gioielli">Gioielli</option>
+                        <option value="tessuti">Tessuti</option>
+                        <option value="legno">Legno</option>
+                    </select>
+                </div>
+    
+                <!-- Filtro per prezzo -->
+                <div class="filter-group">
+                    <label for="priceFilter">Ordina per prezzo</label>
+                    <select id="priceFilter" class="filter-select">
+                        <option value="">Prezzo</option>
+                        <option value="asc">Dal più basso</option>
+                        <option value="desc">Dal più alto</option>
+                    </select>
+                </div>
+    
+                <!-- Barra di ricerca -->
+                <div class="filter-group search-group">
+                    <label for="searchFilter">Cerca</label>
+                    <input 
+                        type="text" 
+                        id="searchFilter" 
+                        class="search-input" 
+                        placeholder="Cerca prodotti..."
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <section class="products">
+        <div class="container">
+            <h2>Prodotti in Evidenza</h2>
+            <div class="products-grid">
+                <!-- I prodotti verranno inseriti dinamicamente da JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <script src="../js/components/products.js"></script>
+    <script src="../js/components/cart.js"></script>
+    <script src="../js/components/navbar.js"></script>
+    <script src="../js/main.js"></script>
+
+    
+
+
+
+
+
+</body>
+</html>

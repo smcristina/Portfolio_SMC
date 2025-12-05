@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettaglio Prodotto - Artigianato Online</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/components/navbar.css">
+    <link rel="stylesheet" href="../styles/components/product-detail.css">
+</head>
+<body>
+    <!-- Navbar (stesso codice dell'index) -->
+    <nav class="navbar">
+        <div class="container">
+            <!-- Brand del sito -->
+            <div class="nav-brand">
+                <a href="index.html">Artigianato Online</a>
+            </div>
+    
+            <!-- Icona di toggle per il menu mobile -->
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+    
+            <!-- Lista dei link del menu -->
+            <ul class="nav-menu">
+                <li><a href="products.html">Prodotti</a></li>
+                <li><a href="categories.html">Categorie</a></li>
+                <li>
+                    <a href="cart.html" class="cart-button">
+                        Carrello <span class="cart-count">(0)</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>    
+    
+
+    <main class="product-detail-page">
+        <div class="container">
+            <div class="product-detail">
+                <div class="product-gallery">
+                    <img src="" alt="" id="mainImage" class="main-image">
+                    <div class="thumbnail-list" id="thumbnailList">
+                        <!-- Thumbnails verranno inserite via JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="product-info">
+                    <h1 id="productName"></h1>
+                    <p class="artisan" id="artisanName"></p>
+                    <p class="price" id="productPrice"></p>
+                    
+                    <div class="quantity-selector">
+                        <button class="qty-btn" id="decreaseQty">-</button>
+                        <input type="number" id="quantity" value="1" min="1">
+                        <button class="qty-btn" id="increaseQty">+</button>
+                    </div>
+
+                    <button class="btn-add-cart" onclick="cart.addItem(1)">
+                        Aggiungi al carrello
+                    </button>
+
+
+                    <div class="product-description">
+                        <h2>Descrizione</h2>
+                        <p id="productDescription"></p>
+                    </div>
+
+                    <div class="product-details">
+                        <h2>Dettagli</h2>
+                        <ul id="productSpecs">
+                            <!-- Specifiche verranno inserite via JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/components/products.js"></script>
+<script src="../js/components/cart.js"></script>
+<script src="../js/components/navbar.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>
